@@ -17,6 +17,7 @@
       Chercher par nom :
       <input
         @input="chercherRestaurants()"
+        placeholder="Nom du restaurant"
         type="text"
         v-model="nomRestauRecherche"
       />
@@ -24,9 +25,10 @@
     <p>
       Chercher par cuisine :
       <input
-        @input="chercherRestaurants()"
+        @input="chercherCuisines()"
+        placeholder="Type de cuisine"
         type="text"
-        v-model="nomRestauRecherche"
+        v-model="nomCuisineRecherche"
       />
     </p>
     <p>Nb de pages total : {{ nbPagesTotal }}</p>
@@ -83,10 +85,10 @@ export default {
       nbPagesTotal: 0,
       msg: "",
       nomRestauRecherche: "",
+      nomCuisineRecherche: ""
     };
   },
   mounted() {
-    console.log("AVANT AFFICHAGE");
     this.getRestaurantsFromServer();
   },
   methods: {
@@ -100,6 +102,29 @@ export default {
       if (this.page === this.dernierePage) return;
       this.page++;
       this.getRestaurantsFromServer();
+    },
+    getCuisinesFromServer(){
+       let url = "http://localhost:8080/api/restaurants?";
+       url += "page=" + this.page;
+       url += "&pagesize=" + this.pagesize;
+       url += "&cuisine=" + this.nomCuisineRecherche;
+
+          fetch(url)
+        .then((responseJSON) => {
+          // arrow functions, conserve le bon "this"
+          // la réponse est en JSON, on la convertit avec la ligne suivante
+          responseJSON.json().then((resJS) => {
+            // Maintenant resJS est un vrai objet JavaScript
+            this.restaurants = resJS.data;
+            this.nbRestaurantsTotal = resJS.count;
+            this.nbPagesTotal = Math.round(
+            this.nbRestaurantsTotal / this.pagesize
+            );
+          });
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
     },
     getRestaurantsFromServer() {
       let url = "http://localhost:8080/api/restaurants?";
@@ -127,6 +152,10 @@ export default {
     chercherRestaurants: _.debounce(function() {
       // appelée que si on n'a pas tapé de touches pendant un certain délai
       this.getRestaurantsFromServer();
+    }, 300),
+     chercherCuisines: _.debounce(function() {
+      // appelée que si on n'a pas tapé de touches pendant un certain délai
+      this.getCuisinesFromServer();
     }, 300),
     supprimerRestaurant(r) {
       let url = "http://localhost:8080/api/restaurants/" + r._id;

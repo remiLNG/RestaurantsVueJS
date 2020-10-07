@@ -109,9 +109,9 @@ app.get('/api/restaurants', function(req, res) {
     let pagesize = parseInt(req.query.pagesize || 10);
 
     let name = req.query.name || '';
+	let cuisine = req.query.cuisine || '';
 
-
- 	mongoDBModule.findRestaurants(page, pagesize, name, function(data,count) {
+ 	mongoDBModule.findRestaurants(page, pagesize, name, cuisine,function(data,count) {
  		var objdData = {
  			msg:"restaurant recherchés avec succès",
  			data: data,
