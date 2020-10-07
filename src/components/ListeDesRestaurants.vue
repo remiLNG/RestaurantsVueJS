@@ -13,7 +13,7 @@
     </form>
 
     <h1>Nombre de restaurants : {{ nbRestaurantsTotal }}</h1>
-    <p>
+    <p class="nom">
       Chercher par nom :
       <input
         @input="chercherRestaurants()"
@@ -22,7 +22,7 @@
         v-model="nomRestauRecherche"
       />
     </p>
-    <p>
+    <p class="cuisine">
       Chercher par cuisine :
       <input
         @input="chercherCuisines()"
@@ -58,12 +58,12 @@
         <tr
           v-for="(r, index) in restaurants"
           :key="index"
-          @click="supprimerRestaurant(r)"
           :style="{ backgroundColor: getColor(index) }"
           :class="{ bordureRouge: index === 2 }"
         >
           <td>{{ r.name }}</td>
           <td>{{ r.cuisine }}</td>
+          <td> <button @click="supprimerRestaurant(r)">Supprimer</button></td>
         </tr>
       </tbody>
     </table>
@@ -74,7 +74,7 @@
 import _ from "lodash";
 export default {
   name: "ListeDesRestaurants",
-  data: function() {
+  data: function () {
     return {
       restaurants: [],
       nom: "",
@@ -85,7 +85,7 @@ export default {
       nbPagesTotal: 0,
       msg: "",
       nomRestauRecherche: "",
-      nomCuisineRecherche: ""
+      nomCuisineRecherche: "",
     };
   },
   mounted() {
@@ -103,13 +103,13 @@ export default {
       this.page++;
       this.getRestaurantsFromServer();
     },
-    getCuisinesFromServer(){
-       let url = "http://localhost:8080/api/restaurants?";
-       url += "page=" + this.page;
-       url += "&pagesize=" + this.pagesize;
-       url += "&cuisine=" + this.nomCuisineRecherche;
+    getCuisinesFromServer() {
+      let url = "http://localhost:8080/api/restaurants?";
+      url += "page=" + this.page;
+      url += "&pagesize=" + this.pagesize;
+      url += "&cuisine=" + this.nomCuisineRecherche;
 
-          fetch(url)
+      fetch(url)
         .then((responseJSON) => {
           // arrow functions, conserve le bon "this"
           // la réponse est en JSON, on la convertit avec la ligne suivante
@@ -118,11 +118,11 @@ export default {
             this.restaurants = resJS.data;
             this.nbRestaurantsTotal = resJS.count;
             this.nbPagesTotal = Math.round(
-            this.nbRestaurantsTotal / this.pagesize
+              this.nbRestaurantsTotal / this.pagesize
             );
           });
         })
-        .catch(function(err) {
+        .catch(function (err) {
           console.log(err);
         });
     },
@@ -145,15 +145,15 @@ export default {
             );
           });
         })
-        .catch(function(err) {
+        .catch(function (err) {
           console.log(err);
         });
     },
-    chercherRestaurants: _.debounce(function() {
+    chercherRestaurants: _.debounce(function () {
       // appelée que si on n'a pas tapé de touches pendant un certain délai
       this.getRestaurantsFromServer();
     }, 300),
-     chercherCuisines: _.debounce(function() {
+    chercherCuisines: _.debounce(function () {
       // appelée que si on n'a pas tapé de touches pendant un certain délai
       this.getCuisinesFromServer();
     }, 300),
@@ -172,7 +172,7 @@ export default {
             this.getRestaurantsFromServer();
           });
         })
-        .catch(function(err) {
+        .catch(function (err) {
           console.log(err);
         });
     },
@@ -201,7 +201,7 @@ export default {
             this.getRestaurantsFromServer();
           });
         })
-        .catch(function(err) {
+        .catch(function (err) {
           console.log(err);
         });
 
@@ -216,4 +216,5 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped></style>
+<style scoped>
+</style>

@@ -7,6 +7,7 @@
 <script>
 import ListeDesRestaurants from './components/ListeDesRestaurants.vue'
 
+
 export default {
   name: 'App',
   components: {
@@ -16,5 +17,4 @@ export default {
 </script>
 
 <style>
-
 </style>
