@@ -1,24 +1,45 @@
-# tp3
+# RestaurantsVueJS
 
-## Project setup
-```
-npm install
-```
+# Prerequisites
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
++ Node Js
++ Vue Js
++ MongoDB
 
-### Compiles and minifies for production
-```
-npm run build
-```
+# Run
 
-### Lints and fixes files
++ install all the dependencies
 ```
-npm run lint
+npm i 
+```
++ Move to server repository
+
+```
+cd serveur
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
++ Start the server
+```
+node serverCrudWithMongo.js
+```
+
+
++ Move to client repository
+```
+cd client
+```
+```
+npm i -g http-server or npm i -g serve
+```
++ Start the client 
+```
+http-server or serve
+```
+
+# Features
+
+# Authors
+
++ Rémi Longin
++ Guilhem Fabre-Sauterey 
+
