@@ -1,7 +1,6 @@
 <template>
   <div>
-    <h2>{{ msg }}</h2>
-    <form @submit.prevent="ajouterRestaurant(event)">
+    <form @submit.prevent="ajouterRestaurant($event)">
       <label>
         Nom : <input name="nom" type="text" required v-model="nom" />
       </label>
@@ -22,14 +21,22 @@
         v-model="nomRestauRecherche"
       />
     </p>
+    <p>
+      Chercher par cuisine :
+      <input
+        @input="chercherRestaurants()"
+        type="text"
+        v-model="nomRestauRecherche"
+      />
+    </p>
     <p>Nb de pages total : {{ nbPagesTotal }}</p>
     <p>
       Nb restaurants par page :
       <input
         @input="getRestaurantsFromServer()"
         type="range"
-        min="2"
-        max="1000"
+        min="1"
+        max="20"
         v-model="pagesize"
       />{{ pagesize }}
     </p>
@@ -65,7 +72,7 @@
 import _ from "lodash";
 export default {
   name: "ListeDesRestaurants",
-  data: function () {
+  data: function() {
     return {
       restaurants: [],
       nom: "",
@@ -113,11 +120,11 @@ export default {
             );
           });
         })
-        .catch(function (err) {
+        .catch(function(err) {
           console.log(err);
         });
     },
-    chercherRestaurants: _.debounce(function () {
+    chercherRestaurants: _.debounce(function() {
       // appelée que si on n'a pas tapé de touches pendant un certain délai
       this.getRestaurantsFromServer();
     }, 300),
@@ -136,7 +143,7 @@ export default {
             this.getRestaurantsFromServer();
           });
         })
-        .catch(function (err) {
+        .catch(function(err) {
           console.log(err);
         });
     },
@@ -165,7 +172,7 @@ export default {
             this.getRestaurantsFromServer();
           });
         })
-        .catch(function (err) {
+        .catch(function(err) {
           console.log(err);
         });
 
@@ -180,5 +187,4 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-</style>
+<style scoped></style>
