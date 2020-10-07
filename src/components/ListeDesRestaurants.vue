@@ -63,7 +63,7 @@
         >
           <td>{{ r.name }}</td>
           <td>{{ r.cuisine }}</td>
-          <td> <button @click="supprimerRestaurant(r)">Supprimer</button></td>
+          <td><button class="btn-trash"  @click="supprimerRestaurant(r)" ><i class="fa fa-trash"></i></button></td>
         </tr>
       </tbody>
     </table>
@@ -217,4 +217,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.btn-trash{
+  background-color: DodgerBlue;
+  border: none;
+  color: white;
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
 </style>
