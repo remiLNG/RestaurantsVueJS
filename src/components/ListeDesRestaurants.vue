@@ -8,8 +8,7 @@
         Cuisine :
         <input name="cuisine" type="text" required v-model="cuisine" />
       </label>
-
-      <button>Ajouter</button>
+      <v-btn small type="submit"> Ajouter </v-btn>
     </form>
       <h1 class="title">Liste des Restaurants</h1>
     
@@ -51,10 +50,12 @@
     </button>
     &nbsp; Page courante : {{ page }}
     <br />
-    <table>
+    <v-simple-table>
       <tr>
         <th>Nom</th>
         <th>Cuisine</th>
+        <th>Details</th>
+        <th></th>
       </tr>
       <tbody>
         <tr
@@ -66,13 +67,19 @@
           <td>{{ r.name }}</td>
           <td>{{ r.cuisine }}</td>
           <td>
+            <p>
+              test
+            </p>
+          </td>
+          <td>
             <button class="btn-trash" @click="supprimerRestaurant(r)">
               <i class="fa fa-trash"></i>
             </button>
           </td>
+          
         </tr>
       </tbody>
-    </table>
+    </v-simple-table>
   </div>
 </template>
 
@@ -234,20 +241,11 @@ table{
   margin-left:auto;
 }
 .btn-trash {
-  background-color: DodgerBlue;
   border: none;
   color: white;
   padding: 12px 16px;
   font-size: 16px;
   cursor: pointer;
-}
-
-img {
-  background-color: DodgerBlue;
-  border: none;
-  color: white;
-  padding: 12px 16px;
-  font-size: 16px;
 }
 
 .nom,
@@ -265,7 +263,6 @@ img {
   padding-bottom: 0.75rem;
   border-width: 0.125rem;
   border-style: hidden;
-  box-shadow: lightblue;
 }
 
 .title{

@@ -1,20 +1,23 @@
 <template>
-  <div id="app">
-    <ListeDesRestaurants/>
-  </div>
+  <v-app>
+    <v-main>
+      <ListeDesRestaurants />
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-import ListeDesRestaurants from './components/ListeDesRestaurants.vue'
-
+import ListeDesRestaurants from "./components/ListeDesRestaurants";
 
 export default {
-  name: 'App',
-  components: {
-    ListeDesRestaurants
-  }
-}
-</script>
+  name: "App",
 
-<style>
-</style>
+  components: {
+    ListeDesRestaurants,
+  },
+
+  data: () => ({
+    //
+  }),
+};
+</script>
