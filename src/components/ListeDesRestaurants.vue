@@ -10,8 +10,8 @@
       </label>
       <v-btn small type="submit"> Ajouter </v-btn>
     </form>
-      <h1 class="title">Liste des Restaurants</h1>
-    
+    <h1 class="title">Liste des Restaurants</h1>
+
     <p class="nom">
       <span class="icon-search"><i class="fas fa-search"></i></span>
       <input
@@ -43,12 +43,8 @@
         v-model="pagesize"
       />{{ pagesize }}
     </p>
-    <button :disabled="page === 0" @click="pagePrecedente()">Précédent</button
-    >&nbsp;&nbsp;
-    <button :disabled="page === nbPagesTotal" @click="pageSuivante()">
-      Suivant
-    </button>
-    &nbsp; Page courante : {{ page }}
+
+    Page courante : {{ page }}
     <br />
     <v-simple-table>
       <tr>
@@ -67,19 +63,57 @@
           <td>{{ r.name }}</td>
           <td>{{ r.cuisine }}</td>
           <td>
-            <p>
-              test
-            </p>
+            <p>test</p>
           </td>
           <td>
-            <button class="btn-trash" @click="supprimerRestaurant(r)">
-              <i class="fa fa-trash"></i>
-            </button>
+            <v-dialog :retain-focus="false" v-model="dialog" persistent max-width="290">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  class="btn-trash"
+                  v-bind="attrs"
+                  v-on="on"
+                >
+                i
+                </v-btn>
+              </template>
+              <v-card>
+                <v-card-title class="headline"> Are you sure ? </v-card-title>
+                <v-card-actions>
+                  <v-btn 
+                  color="green darken-1" 
+                  text
+                  @click="dialog = false">
+                    No
+                  </v-btn>
+                  <v-btn
+                    color="green darken-1"
+                    text
+                    @click="supprimerRestaurant(r);dialog = false"
+                  >
+                    Yes
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
           </td>
-          
         </tr>
       </tbody>
     </v-simple-table>
+    <v-btn
+      class="btn-previous"
+      type="submit"
+      :disabled="page === 0"
+      @click="pagePrecedente()"
+      >Précédent</v-btn
+    >
+    <v-btn
+      class="btn-next"
+      type="submit"
+      :disabled="page === nbPagesTotal"
+      @click="pageSuivante()"
+    >
+      Suivant
+    </v-btn>
   </div>
 </template>
 
@@ -99,6 +133,7 @@ export default {
       msg: "",
       nomRestauRecherche: "",
       nomCuisineRecherche: "",
+      dialog: false,
     };
   },
   mounted() {
@@ -230,15 +265,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
-
-div{
+div {
   text-align: center;
 }
 
-table{
-  margin-right:auto;
-  margin-left:auto;
+table {
+  margin-right: auto;
+  margin-left: auto;
 }
 .btn-trash {
   border: none;
@@ -254,7 +287,8 @@ table{
   margin: 5px;
 }
 
-.searchByNom,.searchByCuisine {
+.searchByNom,
+.searchByCuisine {
   border-radius: 10px;
   background-color: #f1f3f5;
   padding-left: 1rem;
@@ -265,7 +299,12 @@ table{
   border-style: hidden;
 }
 
-.title{
-  font-family: Arial,Tahoma,Bitstream Vera Sans,sans-serif;
+.title {
+  font-family: Arial, Tahoma, Bitstream Vera Sans, sans-serif;
+}
+
+.btn-previous,
+.btn-next {
+  margin: 5px;
 }
 </style>
