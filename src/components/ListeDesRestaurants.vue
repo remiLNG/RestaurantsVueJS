@@ -11,26 +11,28 @@
 
       <button>Ajouter</button>
     </form>
-
-    <h1>Nombre de restaurants : {{ nbRestaurantsTotal }}</h1>
+      <h1 class="title">Liste des Restaurants</h1>
+    
     <p class="nom">
-      Chercher par nom :
+      <span class="icon-search"><i class="fas fa-search"></i></span>
       <input
+        class="searchByNom"
         @input="chercherRestaurants()"
-        placeholder="Nom du restaurant"
+        placeholder="Recherche par nom"
         type="text"
         v-model="nomRestauRecherche"
       />
     </p>
     <p class="cuisine">
-      Chercher par cuisine :
       <input
+        class="searchByCuisine"
         @input="chercherCuisines()"
-        placeholder="Type de cuisine"
+        placeholder="Recherche par cuisine"
         type="text"
         v-model="nomCuisineRecherche"
       />
     </p>
+    <p>Nombre de restaurants : {{ nbRestaurantsTotal }}</p>
     <p>Nb de pages total : {{ nbPagesTotal }}</p>
     <p>
       Nb restaurants par page :
@@ -38,7 +40,7 @@
         @input="getRestaurantsFromServer()"
         type="range"
         min="1"
-        max="20"
+        max="10"
         v-model="pagesize"
       />{{ pagesize }}
     </p>
@@ -63,7 +65,11 @@
         >
           <td>{{ r.name }}</td>
           <td>{{ r.cuisine }}</td>
-          <td><button class="btn-trash"  @click="supprimerRestaurant(r)" ><i class="fa fa-trash"></i></button></td>
+          <td>
+            <button class="btn-trash" @click="supprimerRestaurant(r)">
+              <i class="fa fa-trash"></i>
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -217,12 +223,52 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.btn-trash{
+
+
+div{
+  text-align: center;
+}
+
+table{
+  margin-right:auto;
+  margin-left:auto;
+}
+.btn-trash {
   background-color: DodgerBlue;
   border: none;
   color: white;
   padding: 12px 16px;
   font-size: 16px;
   cursor: pointer;
+}
+
+img {
+  background-color: DodgerBlue;
+  border: none;
+  color: white;
+  padding: 12px 16px;
+  font-size: 16px;
+}
+
+.nom,
+.cuisine {
+  display: inline-block;
+  margin: 5px;
+}
+
+.searchByNom,.searchByCuisine {
+  border-radius: 10px;
+  background-color: #f1f3f5;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-width: 0.125rem;
+  border-style: hidden;
+  box-shadow: lightblue;
+}
+
+.title{
+  font-family: Arial,Tahoma,Bitstream Vera Sans,sans-serif;
 }
 </style>
