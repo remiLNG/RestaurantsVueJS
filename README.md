@@ -6,16 +6,32 @@
 + Vue Js
 + MongoDB
 
+## import the dataset
+
+https://raw.githubusercontent.com/mongodb/docs-assets/primer-dataset/primer-dataset.json
+
+```
+mongoimport --db test --collection restaurants --drop --file primer-dataset.json
+```
+
 # Run
 
-+ install all the dependencies
-```
-npm i 
-```
-+ Move to server repository
++ start mongoDB in a terminal
 
 ```
+mongod
+```
+
+
+
++ Move to server folder
+```
 cd serveur
+```
+
+## install all the dependencies
+```
+npm i 
 ```
 
 + Start the server
@@ -23,17 +39,19 @@ cd serveur
 node serverCrudWithMongo.js
 ```
 
++ Move to main folder
 
-+ Move to client repository
+## install all the dependencies
 ```
-cd client
+npm i 
 ```
+
 ```
-npm i -g http-server or npm i -g serve
+npm i -g serve
 ```
 + Start the client 
 ```
-http-server or serve
+npm run serve
 ```
 
 # Features
