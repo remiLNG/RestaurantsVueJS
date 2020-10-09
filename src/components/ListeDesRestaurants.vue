@@ -8,12 +8,22 @@
         Cuisine :
         <input name="cuisine" type="text" required v-model="cuisine" />
       </label>
-      <v-btn small type="submit"> Ajouter </v-btn>
+      <v-dialog v-model="addConfirm" width="500">
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn small type="submit" v-bind="attrs" v-on="on"> Ajouter </v-btn>
+        </template>
+
+        <v-card>
+          <v-card-title class="justify-center">Nouveau restaurant ajouté !</v-card-title>
+          <v-card-actions class="justify-center">
+            <v-btn color="primary" text @click="addConfirm = false"> OK </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </form>
     <h1 class="title">Liste des Restaurants</h1>
 
     <p class="nom">
-      <span class="icon-search"><i class="fas fa-search"></i></span>
       <input
         class="searchByNom"
         @input="chercherRestaurants()"
@@ -41,10 +51,8 @@
         min="1"
         max="10"
         v-model="pagesize"
-      />{{ pagesize }}
+      />
     </p>
-
-    Page courante : {{ page }}
     <br />
     <v-simple-table>
       <tr>
@@ -66,31 +74,34 @@
             <p>test</p>
           </td>
           <td>
-            <v-dialog :retain-focus="false" v-model="dialog" persistent max-width="290">
+            <v-dialog
+              :retain-focus="false"
+              v-model="dialog"
+              persistent
+              max-width="290"
+            >
               <template v-slot:activator="{ on, attrs }">
-                <v-btn
-                  class="btn-trash"
-                  v-bind="attrs"
-                  v-on="on"
-                >
-                i
+                <v-btn class="btn-trash" v-bind="attrs" v-on="on">
+                  <v-icon> far fa-trash-alt </v-icon>
                 </v-btn>
               </template>
               <v-card>
-                <v-card-title class="headline"> Are you sure ? </v-card-title>
-                <v-card-actions>
-                  <v-btn 
-                  color="green darken-1" 
-                  text
-                  @click="dialog = false">
-                    No
+                <v-card-title class="justify-center">
+                  Etes-vous sur ?
+                </v-card-title>
+                <v-card-actions class="justify-center">
+                  <v-btn color="green darken-1" text @click="dialog = false">
+                    Non
                   </v-btn>
                   <v-btn
                     color="green darken-1"
                     text
-                    @click="supprimerRestaurant(r);dialog = false"
+                    @click="
+                      supprimerRestaurant(r);
+                      dialog = false;
+                    "
                   >
-                    Yes
+                    Oui
                   </v-btn>
                 </v-card-actions>
               </v-card>
@@ -114,6 +125,7 @@
     >
       Suivant
     </v-btn>
+    <p>  Page courante : {{ page }} </p>
   </div>
 </template>
 
@@ -134,6 +146,7 @@ export default {
       nomRestauRecherche: "",
       nomCuisineRecherche: "",
       dialog: false,
+      addConfirm:false
     };
   },
   mounted() {
@@ -272,13 +285,6 @@ div {
 table {
   margin-right: auto;
   margin-left: auto;
-}
-.btn-trash {
-  border: none;
-  color: white;
-  padding: 12px 16px;
-  font-size: 16px;
-  cursor: pointer;
 }
 
 .nom,
