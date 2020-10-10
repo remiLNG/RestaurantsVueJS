@@ -10,7 +10,7 @@
       </label>
       <v-dialog v-model="addConfirm" width="500">
         <template v-slot:activator="{ on, attrs }">
-          <v-btn small type="submit" v-bind="attrs" v-on="on"> Ajouter </v-btn>
+          <v-btn :disabled="nom.length < 1 || cuisine.length < 1 " small type="submit" v-bind="attrs" v-on="on"> Ajouter </v-btn>
         </template>
 
         <v-card>
