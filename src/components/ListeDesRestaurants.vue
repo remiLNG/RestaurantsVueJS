@@ -71,7 +71,13 @@
           <td>{{ r.name }}</td>
           <td>{{ r.cuisine }}</td>
           <td>
-            <p>test</p>
+            <v-btn
+            icon>
+             <v-icon
+             transparent
+             > fas fa-info-circle 
+             </v-icon>
+            </v-btn>
           </td>
           <td>
             <v-dialog
@@ -81,7 +87,7 @@
               max-width="290"
             >
               <template v-slot:activator="{ on, attrs }">
-                <v-btn class="btn-trash" v-bind="attrs" v-on="on">
+                <v-btn icon class="btn-trash" v-bind="attrs" v-on="on">
                   <v-icon> far fa-trash-alt </v-icon>
                 </v-btn>
               </template>
