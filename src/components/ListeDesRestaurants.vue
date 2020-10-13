@@ -71,23 +71,44 @@
           <td>{{ r.name }}</td>
           <td>{{ r.cuisine }}</td>
           <td>
-            <v-btn
-            icon>
-             <v-icon
-             transparent
-             > fas fa-info-circle 
-             </v-icon>
-            </v-btn>
-          </td>
-          <td>
+            
+            
+
             <v-dialog
               :retain-focus="false"
-              v-model="dialog"
+              v-model="dialoginfo"
               persistent
               max-width="290"
             >
               <template v-slot:activator="{ on, attrs }">
-                <v-btn icon class="btn-trash" v-bind="attrs" v-on="on">
+                <v-btn icon  @click="setCourant(r.name); dialoginfo = true;" v-bind="attrs" v-on="on">
+                  <v-icon transparent> 
+                  fas fa-info-circle 
+                  </v-icon>
+            </v-btn>
+              </template>
+              <v-card>
+                <v-card-title class="justify-center">
+                  Bienvenue sur la page du restaurant : {{selectedName}}
+                </v-card-title>
+                <v-card-actions >
+                  <v-btn text @click="dialoginfo = false">
+                    Fermer
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+
+          </td>
+          <td>
+            <v-dialog
+              :retain-focus="false"
+              v-model="dialogtrash"
+              persistent
+              max-width="290"
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn icon @click="setIDcourant(r._id)" class="btn-trash" v-bind="attrs" v-on="on">
                   <v-icon> far fa-trash-alt </v-icon>
                 </v-btn>
               </template>
@@ -96,15 +117,15 @@
                   Etes-vous sur ?
                 </v-card-title>
                 <v-card-actions class="justify-center">
-                  <v-btn color="green darken-1" text @click="dialog = false">
+                  <v-btn color="green darken-1" text @click="dialogtrash = false">
                     Non
                   </v-btn>
                   <v-btn
                     color="green darken-1"
                     text
                     @click="
-                      supprimerRestaurant(r);
-                      dialog = false;
+                      supprimerRestaurant(selectedID);
+                      dialogtrash = false;
                     "
                   >
                     Oui
@@ -151,8 +172,11 @@ export default {
       msg: "",
       nomRestauRecherche: "",
       nomCuisineRecherche: "",
-      dialog: false,
-      addConfirm:false
+      dialogtrash: false,
+      dialoginfo: false,
+      addConfirm:false,
+      selectedName: "",
+      selectedID:"",
     };
   },
   mounted() {
@@ -225,7 +249,7 @@ export default {
       this.getCuisinesFromServer();
     }, 300),
     supprimerRestaurant(r) {
-      let url = "http://localhost:8080/api/restaurants/" + r._id;
+      let url = "http://localhost:8080/api/restaurants/" + r;
 
       fetch(url, {
         method: "DELETE",
@@ -243,6 +267,12 @@ export default {
           console.log(err);
         });
     },
+    setCourant(name) {
+      this.selectedName = name;
+    },
+    setIDcourant(id){
+      this.selectedID = id;   
+      },
     ajouterRestaurant(event) {
       // Récupération du formulaire. Pas besoin de document.querySelector
       // ou document.getElementById puisque c'est le formulaire qui a généré
@@ -276,7 +306,7 @@ export default {
       this.cuisine = "";
     },
     getColor(index) {
-      return index % 2 ? "lightBlue" : "pink";
+      return index % 2 ? "white" : "lightgrey";
     },
   },
 };
