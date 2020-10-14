@@ -1,27 +1,8 @@
 <template>
   <div>
-    <form @submit.prevent="ajouterRestaurant($event)">
-      <label>
-        Nom : <input name="nom" type="text" required v-model="nom" />
-      </label>
-      <label>
-        Cuisine :
-        <input name="cuisine" type="text" required v-model="cuisine" />
-      </label>
-      <v-dialog v-model="addConfirm" width="500">
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn :disabled="nom.length < 1 || cuisine.length < 1 " small type="submit" v-bind="attrs" v-on="on"> Ajouter </v-btn>
-        </template>
-
-        <v-card>
-          <v-card-title class="justify-center">Nouveau restaurant ajouté !</v-card-title>
-          <v-card-actions class="justify-center">
-            <v-btn color="primary" text @click="addConfirm = false"> OK </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-    </form>
-    <h1 class="title">Liste des Restaurants</h1>
+    <div class="home_img">
+      <h1 class="h1title">Liste des Restaurants</h1>
+    </div>
 
     <p class="nom">
       <input
@@ -71,9 +52,6 @@
           <td>{{ r.name }}</td>
           <td>{{ r.cuisine }}</td>
           <td>
-            
-            
-
             <v-dialog
               :retain-focus="false"
               v-model="dialoginfo"
@@ -81,24 +59,27 @@
               max-width="290"
             >
               <template v-slot:activator="{ on, attrs }">
-                <v-btn icon  @click="setCourant(r.name); dialoginfo = true;" v-bind="attrs" v-on="on">
-                  <v-icon transparent> 
-                  fas fa-info-circle 
-                  </v-icon>
-            </v-btn>
+                <v-btn
+                  icon
+                  @click="
+                    setCourant(r.name);
+                    dialoginfo = true;
+                  "
+                  v-bind="attrs"
+                  v-on="on"
+                >
+                  <v-icon transparent> fas fa-info-circle </v-icon>
+                </v-btn>
               </template>
               <v-card>
                 <v-card-title class="justify-center">
-                  Bienvenue sur la page du restaurant : {{selectedName}}
+                  Bienvenue sur la page du restaurant : {{ selectedName }}
                 </v-card-title>
-                <v-card-actions >
-                  <v-btn text @click="dialoginfo = false">
-                    Fermer
-                  </v-btn>
+                <v-card-actions>
+                  <v-btn text @click="dialoginfo = false"> Fermer </v-btn>
                 </v-card-actions>
               </v-card>
             </v-dialog>
-
           </td>
           <td>
             <v-dialog
@@ -108,7 +89,13 @@
               max-width="290"
             >
               <template v-slot:activator="{ on, attrs }">
-                <v-btn icon @click="setIDcourant(r._id)" class="btn-trash" v-bind="attrs" v-on="on">
+                <v-btn
+                  icon
+                  @click="setIDcourant(r._id)"
+                  class="btn-trash"
+                  v-bind="attrs"
+                  v-on="on"
+                >
                   <v-icon> far fa-trash-alt </v-icon>
                 </v-btn>
               </template>
@@ -117,7 +104,11 @@
                   Etes-vous sur ?
                 </v-card-title>
                 <v-card-actions class="justify-center">
-                  <v-btn color="green darken-1" text @click="dialogtrash = false">
+                  <v-btn
+                    color="green darken-1"
+                    text
+                    @click="dialogtrash = false"
+                  >
                     Non
                   </v-btn>
                   <v-btn
@@ -152,7 +143,43 @@
     >
       Suivant
     </v-btn>
-    <p>  Page courante : {{ page }} </p>
+    <p>Page courante : {{ page }}</p>
+    <form @submit.prevent="ajouterRestaurant($event)">
+      <label>
+        Nom : <input name="nom" type="text" required v-model="nom" />
+      </label>
+      <label>
+        Cuisine :
+        <input name="cuisine" type="text" required v-model="cuisine" />
+      </label>
+      <v-dialog v-model="addConfirm" width="500">
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            :disabled="nom.length < 1 || cuisine.length < 1"
+            small
+            type="submit"
+            v-bind="attrs"
+            v-on="on"
+          >
+            Ajouter
+          </v-btn>
+        </template>
+
+        <v-card>
+          <v-card-title class="justify-center"
+            >Nouveau restaurant ajouté !</v-card-title
+          >
+          <v-card-actions class="justify-center">
+            <v-btn color="primary" text @click="addConfirm = false"> OK </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </form>
+    <v-footer padless>
+      <v-col class="text-center" cols="12">
+        {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
+      </v-col>
+    </v-footer>
   </div>
 </template>
 
@@ -174,9 +201,9 @@ export default {
       nomCuisineRecherche: "",
       dialogtrash: false,
       dialoginfo: false,
-      addConfirm:false,
+      addConfirm: false,
       selectedName: "",
-      selectedID:"",
+      selectedID: "",
     };
   },
   mounted() {
@@ -270,9 +297,9 @@ export default {
     setCourant(name) {
       this.selectedName = name;
     },
-    setIDcourant(id){
-      this.selectedID = id;   
-      },
+    setIDcourant(id) {
+      this.selectedID = id;
+    },
     ajouterRestaurant(event) {
       // Récupération du formulaire. Pas besoin de document.querySelector
       // ou document.getElementById puisque c'est le formulaire qui a généré
@@ -341,10 +368,25 @@ table {
   border-style: hidden;
 }
 
-.title {
+.h1title {
   font-family: Arial, Tahoma, Bitstream Vera Sans, sans-serif;
+  font-size: 32px !important;
+  line-height: 2em;
+  letter-spacing: 0.0125rem !important;
+  text-align: center;
+  flex: auto;
+  padding: 10rem;
+  color: #f1f3f5;
 }
 
+.home_img {
+  background-image: url("../assets/home.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 30rem;
+  background-position-y: -90px;
+}
 .btn-previous,
 .btn-next {
   margin: 5px;
