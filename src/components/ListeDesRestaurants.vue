@@ -197,8 +197,8 @@
           </v-dialog>
         </v-col>
       </v-container>
-      {{createMenu()}}
     </v-form>
+    <v-btn  type="submit" @click="createMenu()"> Afficher menu </v-btn>
     <v-footer color="#68B8D3">
       <v-col class="text-center">
         <strong> Projet Buffa - Fabre-Sauterey Guilhem - Longin Rémi - {{ new Date().getFullYear() }} </strong>
@@ -250,11 +250,12 @@ export default {
   },
   methods: {
     createMenu(){
-      var randEntree = Math.round(Math.random()*this.entrees.length)
-      var randPlat = Math.round(Math.random()*this.plat.length)
-      var randDessert = Math.round(Math.random()*this.dessert.length)
-      this.menu.push(this.entrees[randEntree],this.plat[randPlat],this.dessert[randDessert])
-      return this.menu
+      var randEntree = Math.floor(Math.random()*this.entrees.length)
+      var randPlat = Math.floor(Math.random()*this.plat.length)
+      var randDessert = Math.floor(Math.random()*this.dessert.length)
+      var tab = [this.entrees[randEntree],this.plat[randPlat],this.dessert[randDessert]]
+      this.menu = tab
+      alert(this.menu)
     },
     pagePrecedente() {
       if (this.page === 0) return;
