@@ -39,6 +39,8 @@
       <tr>
         <th>Nom</th>
         <th>Cuisine</th>
+        <th>Quartier</th>
+        <th>Note</th>
         <th>Details</th>
         <th></th>
       </tr>
@@ -51,6 +53,8 @@
         >
           <td>{{ r.name }}</td>
           <td>{{ r.cuisine }}</td>
+          <td>{{r.borough}}</td>
+          <td>{{ r.grades[1].grade }}</td>
           <td>
             <v-dialog
               :retain-focus="false"
