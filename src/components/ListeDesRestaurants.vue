@@ -144,40 +144,60 @@
       Suivant
     </v-btn>
     <p>Page courante : {{ page }}</p>
-    <form @submit.prevent="ajouterRestaurant($event)">
-      <label>
-        Nom : <input name="nom" type="text" required v-model="nom" />
-      </label>
-      <label>
-        Cuisine :
-        <input name="cuisine" type="text" required v-model="cuisine" />
-      </label>
-      <v-dialog v-model="addConfirm" width="500">
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn
-            :disabled="nom.length < 1 || cuisine.length < 1"
-            small
-            type="submit"
-            v-bind="attrs"
-            v-on="on"
-          >
-            Ajouter
-          </v-btn>
-        </template>
+    <h2>Ajouter un nouveau restaurant</h2>
+    <v-form id="add" @submit.prevent="ajouterRestaurant($event)">
+      <v-container>
+        <v-col cols="12" sm="4">
+          <v-text-field
+            name="nom"
+            v-model="nom"
+            filled
+            rounded
+            label="Nom cuisine"
+            clearable
+            type="text"
+            required
+          ></v-text-field>
+          <v-text-field
+            name="cuisine"
+            v-model="cuisine"
+            filled
+            rounded
+            label="Type cuisine"
+            clearable
+            type="text"
+            required
+          ></v-text-field>
+          <v-dialog v-model="addConfirm" width="500">
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                :disabled="nom.length < 1 || cuisine.length < 1"
+                small
+                type="submit"
+                v-bind="attrs"
+                v-on="on"
+              >
+                Ajouter
+              </v-btn>
+            </template>
+            <v-card>
+              <v-card-title class="justify-center"
+                >Nouveau restaurant ajouté !</v-card-title
+              >
+              <v-card-actions class="justify-center">
+                <v-btn color="primary" text @click="addConfirm = false">
+                  OK
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </v-col>
+      </v-container>
+    </v-form>
 
-        <v-card>
-          <v-card-title class="justify-center"
-            >Nouveau restaurant ajouté !</v-card-title
-          >
-          <v-card-actions class="justify-center">
-            <v-btn color="primary" text @click="addConfirm = false"> OK </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-    </form>
-    <v-footer padless>
-      <v-col class="text-center" cols="12">
-        {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
+    <v-footer color="#68B8D3">
+      <v-col class="text-center">
+        <strong> Projet Buffa - Fabre-Sauterey Guilhem - Longin Rémi - {{ new Date().getFullYear() }} </strong>
       </v-col>
     </v-footer>
   </div>
@@ -345,11 +365,6 @@ div {
   text-align: center;
 }
 
-table {
-  margin-right: auto;
-  margin-left: auto;
-}
-
 .nom,
 .cuisine {
   display: inline-block;
@@ -390,5 +405,11 @@ table {
 .btn-previous,
 .btn-next {
   margin: 5px;
+}
+
+.col-sm-4 {
+  flex: 0 0 33.3333333333%;
+  max-width: 33.3333333333%;
+  margin: auto;
 }
 </style>
