@@ -27,8 +27,13 @@ div {
     text-align: center;
     flex: auto;
     padding: 10rem;
+    padding-bottom: 1rem;
     color: #f1f3f5;
   }
+  .searchByNom:focus, .searchByCuisine:focus {
+    line-height: 0px;
+    outline: -webkit-focus-ring-color auto 0px;
+}
   
   .home_img {
     background-image: url("../assets/home.jpg");
@@ -47,4 +52,10 @@ div {
     flex: 0 0 33.3333333333%;
     max-width: 33.3333333333%;
     margin: auto;
+  }
+  .moman{
+    background-color: blueviolet;
+    display: block;
+    width: 100px;
+    justify-content: flex-end;
   }

@@ -42,6 +42,14 @@ export default {
       this.page++;
       this.getRestaurantsFromServer();
     },
+    pageder(){
+      this.page += this.nbPagesTotal;
+      this.getRestaurantsFromServer();
+    },
+    pageprems(){
+      this.page = 0;
+      this.getRestaurantsFromServer();
+    },
     getCuisinesFromServer() {
       let url = "http://localhost:8080/api/restaurants?";
       url += "page=" + this.page;

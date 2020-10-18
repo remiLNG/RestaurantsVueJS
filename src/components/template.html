@@ -1,26 +1,32 @@
 <div>
     <div class="home_img">
+    <div class="moman">
+      <p>
+        Plat du moman
+      </p>
+    </div>
       <h1 class="h1title">Liste des Restaurants</h1>
+      <p class="nom">
+        <input
+          class="searchByNom"
+          @input="chercherRestaurants()"
+          placeholder="Recherche par nom"
+          type="text"
+          v-model="nomRestauRecherche"
+        />
+      </p>
+      <p class="cuisine">
+        <input
+          class="searchByCuisine"
+          @input="chercherCuisines()"
+          placeholder="Recherche par cuisine"
+          type="text"
+          v-model="nomCuisineRecherche"
+        />
+      </p>
     </div>
 
-    <p class="nom">
-      <input
-        class="searchByNom"
-        @input="chercherRestaurants()"
-        placeholder="Recherche par nom"
-        type="text"
-        v-model="nomRestauRecherche"
-      />
-    </p>
-    <p class="cuisine">
-      <input
-        class="searchByCuisine"
-        @input="chercherCuisines()"
-        placeholder="Recherche par cuisine"
-        type="text"
-        v-model="nomCuisineRecherche"
-      />
-    </p>
+
     <h2>Ajouter un nouveau restaurant</h2>
     <v-form id="add" @submit.prevent="ajouterRestaurant($event)">
       <v-container>
@@ -166,12 +172,17 @@
         </tr>
       </tbody>
     </v-simple-table>
+    <v-btn @click="pageprems()">
+      <<
+    </v-btn>
     <v-btn
       class="btn-previous"
       type="submit"
       :disabled="page === 0"
       @click="pagePrecedente()"
-      >Précédent</v-btn
+      >
+      <
+      </v-btn
     >
     <v-btn
       class="btn-next"
@@ -179,12 +190,16 @@
       :disabled="page === nbPagesTotal"
       @click="pageSuivante()"
     >
-      Suivant
+      >
     </v-btn>
-    <p>Page courante : {{ page }}</p>
+    <v-btn
+      @click="pageder()">
+      >>
+    </v-btn>
+    <p>Page courante : {{ page +1 }}</p>
 
     <p>Nombre de restaurants : {{ nbRestaurantsTotal }}</p>
-    <p>Nb de pages total : {{ nbPagesTotal }}</p>
+    <p>Nb de pages total : {{ nbPagesTotal +1 }}</p>
     <p>
       Nb restaurants par page :
       <input
