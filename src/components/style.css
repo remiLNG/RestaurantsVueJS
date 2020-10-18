@@ -1,0 +1,50 @@
+div {
+    text-align: center;
+  }
+  .nom,
+  .cuisine {
+    display: inline-block;
+    margin: 5px;
+  }
+  
+  .searchByNom,
+  .searchByCuisine {
+    border-radius: 10px;
+    background-color: #f1f3f5;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-width: 0.125rem;
+    border-style: hidden;
+  }
+  
+  .h1title {
+    font-family: Arial, Tahoma, Bitstream Vera Sans, sans-serif;
+    font-size: 32px !important;
+    line-height: 2em;
+    letter-spacing: 0.0125rem !important;
+    text-align: center;
+    flex: auto;
+    padding: 10rem;
+    color: #f1f3f5;
+  }
+  
+  .home_img {
+    background-image: url("../assets/home.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 30rem;
+    background-position-y: -90px;
+  }
+  .btn-previous,
+  .btn-next {
+    margin: 5px;
+  }
+  
+  .col-sm-4 {
+    flex: 0 0 33.3333333333%;
+    max-width: 33.3333333333%;
+    margin: auto;
+  }
