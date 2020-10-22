@@ -26,7 +26,7 @@ div {
     letter-spacing: 0.0125rem !important;
     text-align: center;
     flex: auto;
-    padding: 10rem;
+    padding: 2rem;
     padding-bottom: 1rem;
     color: #f1f3f5;
   }
@@ -70,3 +70,24 @@ div {
     left: 80%;
 
   }
+
+  .add-resto{
+    margin: 15px;
+    color: #32AE87;
+  }
+
+th{
+  background-color:  lightgray;
+  color:#32AE87
+}
+
+td{
+  text-align: left;
+}
+tfoot{
+  background-color:  lightgray;
+}
+
+.info-btn, .trash-btn, .like-btn{
+  text-align: center;
+}

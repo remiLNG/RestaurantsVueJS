@@ -1,9 +1,19 @@
 <div>
+  <div class="toolbar">
+    <v-app-bar
+      color="white"
+      dense
+      flat
+    >
+      <v-btn>
+        favoris
+      </v-btn>
+    </v-app-bar>
+  </div>
     <div class="home_img">
     <div class="moman">
       <p>
         Restau du moman :
-       
       </p>
     </div>
       <h1 class="h1title">Liste des Restaurants</h1>
@@ -27,7 +37,7 @@
       </p>
     </div>
 
-
+    <div class="add-resto">
     <h2>Ajouter un nouveau restaurant</h2>
     <v-form id="add" @submit.prevent="ajouterRestaurant($event)">
       <v-container>
@@ -78,12 +88,14 @@
         </v-col>
       </v-container>
     </v-form>
+  </div>
     <v-simple-table>
       <tr>
         <th>Nom</th>
         <th>Cuisine</th>
         <th>Quartier</th>
         <th>Details</th>
+        <th></th>
         <th></th>
       </tr>
       <tbody>
@@ -96,7 +108,7 @@
           <td>{{ r.name }}</td>
           <td>{{ r.cuisine }}</td>
           <td>{{r.borough}}</td>
-          <td>
+          <td class="info-btn">
             <v-dialog
               :retain-focus="false"
               v-model="dialoginfo"
@@ -126,7 +138,14 @@
               </v-card>
             </v-dialog>
           </td>
-          <td>
+          <td class="like-btn">
+            <v-btn
+            icon
+          >
+            <v-icon >mdi-heart</v-icon>
+          </v-btn>
+          </td>
+          <td class="trash-btn">
             <v-dialog
               :retain-focus="false"
               v-model="dialogtrash"
@@ -172,35 +191,32 @@
           </td>
         </tr>
       </tbody>
+      <tfoot>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </tfoot>
     </v-simple-table>
-    <v-btn @click="pageprems()">
-      <<
-    </v-btn>
-    <v-btn
-      class="btn-previous"
-      type="submit"
-      :disabled="page === 0"
-      @click="pagePrecedente()"
-      >
-      <
-      </v-btn
-    >
-    <v-btn
-      class="btn-next"
-      type="submit"
-      :disabled="page === nbPagesTotal"
-      @click="pageSuivante()"
-    >
-      >
-    </v-btn>
-    <v-btn
-      @click="pageder()">
-      >>
-    </v-btn>
-    <p>Page courante : {{ page +1 }}</p>
-
+    <v-btn @click="pageprems()" :disabled="page === 0" icon>
+      <v-icon large color="#32AE87"> fas fa-chevron-circle-left</v-icon>
+      </v-btn> 
+    &nbsp; 
+    <v-btn class="btn-previous" type="submit" :disabled="page === 0" @click="pagePrecedente()" icon>
+      <v-icon large color="#32AE87"> fas fa-arrow-circle-left</v-icon>
+    </v-btn> 
+    &nbsp; 
+    <v-btn class="btn-next" type="submit" :disabled="page === nbPagesTotal" @click="pageSuivante()" icon>
+      <v-icon large color="#32AE87"> fas fa-arrow-circle-right </v-icon>
+    </v-btn > 
+    &nbsp; 
+    <v-btn @click="pageder()" :disabled="page === nbPagesTotal" icon> <v-icon large color="#32AE87"> fas fa-chevron-circle-right</v-icon> </v-btn>
+    <p>Page  {{ page +1 }} sur {{ nbPagesTotal +1 }} </p>
     <p>Nombre de restaurants : {{ nbRestaurantsTotal }}</p>
-    <p>Nb de pages total : {{ nbPagesTotal +1 }}</p>
     <p>
       Nb restaurants par page :
       <input
@@ -212,9 +228,9 @@
       />
     </p>
    
-    <v-footer color="#68B8D3">
+    <v-footer color="#FAF1ED">
       <v-col class="text-center">
-        <strong> Projet Buffa - Fabre-Sauterey Guilhem - Longin Rémi - {{ new Date().getFullYear() }} </strong>
+        <p> Projet Buffa - Fabre-Sauterey Guilhem - Longin Rémi - {{ new Date().getFullYear() }} </p> 
       </v-col>
     </v-footer>
   </div>

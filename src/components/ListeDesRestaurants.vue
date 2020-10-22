@@ -43,6 +43,7 @@ export default {
       this.getRestaurantsFromServer();
     },
     pageder(){
+      if(this.page === this.nbPagesTotal) return;
       this.page += this.nbPagesTotal;
       this.getRestaurantsFromServer();
     },
@@ -165,7 +166,7 @@ export default {
       this.cuisine = "";
     },
     getColor(index) {
-      return index % 2 ? "white" : "lightgrey";
+      return index % 2 ? "#FAF1ED" : "#FAF1ED";
     },
   },
 };
