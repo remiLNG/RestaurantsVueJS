@@ -129,6 +129,9 @@ export default {
     setIDcourant(id) {
       this.selectedID = id;
     },
+    setRestoAlea(){
+      return this.resJS.data[Math.floor(Math.random()*this.nbRestaurantsTotal)].name;
+    },
     ajouterRestaurant(event) {
       // Récupération du formulaire. Pas besoin de document.querySelector
       // ou document.getElementById puisque c'est le formulaire qui a généré

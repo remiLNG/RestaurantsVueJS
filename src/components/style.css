@@ -54,8 +54,19 @@ div {
     margin: auto;
   }
   .moman{
-    background-color: blueviolet;
+  
     display: block;
     width: 100px;
-    justify-content: flex-end;
+    background-color:lightblue;
+    padding-top: 3rem;
+    padding-right: 13rem;
+    box-sizing: border-box;
+    border-color : black;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 20px;
+    position: relative;
+    top: 10%;
+    left: 80%;
+
   }
