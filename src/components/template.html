@@ -5,8 +5,8 @@
       dense
       flat
     >
-      <v-btn>
-        favoris
+      <v-btn @click>
+        <router-link to="favoris">Favoris</router-link>
       </v-btn>
     </v-app-bar>
   </div>
@@ -138,7 +138,7 @@
               </v-card>
             </v-dialog>
           </td>
-          <td class="like-btn">
+          <td class="like-btn" @click= ajoutFavoris(r)>
             <v-btn
             icon
           >

@@ -25,12 +25,17 @@ export default {
       addConfirm: false,
       selectedName: "",
       selectedID: "",
+      favoris: [],
     };
   },
   mounted() {
     this.getRestaurantsFromServer();
   },
   methods: {
+    ajoutFavoris(rid){
+      this.favoris.push(rid.name);
+      console.log(this.favoris);
+    },
     pagePrecedente() {
       if (this.page === 0) return;
 
