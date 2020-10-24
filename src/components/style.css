@@ -55,7 +55,6 @@ div {
     margin: auto;
   }
   .moman{
-  
     display: block;
     width: 100px;
     background-color:lightblue;
@@ -69,8 +68,12 @@ div {
     position: relative;
     top: 10%;
     left: 80%;
-
   }
+
+  .moman-txt{
+    text-align: center;
+  }
+
 
   .add-resto{
     margin: 15px;
@@ -79,11 +82,13 @@ div {
 
 thead{
   background-color:  lightgray;
+ 
 
 }
 
 th{
   color:#32AE87 !important;
+  text-align: center !important;
 
 }
 
@@ -97,3 +102,4 @@ tfoot{
 .info-btn, .trash-btn, .like-btn{
   text-align: center;
 }
+

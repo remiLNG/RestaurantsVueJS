@@ -38,6 +38,18 @@ export default {
   },
   mounted() {
     this.getRestaurantsFromServer();
+
+  },
+  computed:{
+    randomRestaurantName(){
+      if(this.restaurants.length > 0){
+         const r =  Math.floor(Math.random()*this.restaurants.length);
+         const restoName = this.restaurants[r].name;
+         return restoName
+      }
+      return "toto";
+  
+    }
   },
   methods: {
     ajoutFavoris(rid){
