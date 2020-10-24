@@ -1,5 +1,6 @@
 div {
     text-align: center;
+    font-family: Arial, Tahoma, Bitstream Vera Sans, sans-serif;
   }
   .nom,
   .cuisine {
@@ -20,7 +21,7 @@ div {
   }
   
   .h1title {
-    font-family: Arial, Tahoma, Bitstream Vera Sans, sans-serif;
+
     font-size: 32px !important;
     line-height: 2em;
     letter-spacing: 0.0125rem !important;
@@ -76,9 +77,14 @@ div {
     color: #32AE87;
   }
 
-th{
+thead{
   background-color:  lightgray;
-  color:#32AE87
+
+}
+
+th{
+  color:#32AE87 !important;
+
 }
 
 td{

@@ -26,6 +26,14 @@ export default {
       selectedName: "",
       selectedID: "",
       favoris: [],
+      columnHeaders: [
+        "Nom",
+        "Cuisine",
+        "Quartier",
+        "Details",
+        " ",
+        " "
+      ],
     };
   },
   mounted() {
