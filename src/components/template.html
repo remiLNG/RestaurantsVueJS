@@ -13,11 +13,11 @@
         v-model="nomRestauRecherche" />
     </p>
     <p class="cuisine">
-      <input class="searchByCuisine" @input="chercherRestaurants()" placeholder="Recherche par cuisine" type="text"
+      <input class="searchByCuisine" @input="chercherCuisines()" placeholder="Recherche par cuisine" type="text"
         v-model="nomCuisineRecherche" />
     </p>
     <p class="quartier">
-      <input class="searchByQuartier" @input="chercherRestaurants()" placeholder="Recherche par quartier" type="text"
+      <input class="searchByQuartier" @input="chercherQuartiers()" placeholder="Recherche par quartier" type="text"
         v-model="nomQuartierRecherche" />
     </p>
   </div>
@@ -95,23 +95,9 @@
         <td>{{ r.cuisine }}</td>
         <td>{{r.borough}}</td>
         <td class="info-btn">
-          <v-dialog :retain-focus="false" v-model="dialoginfo" persistent max-width="290">
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn icon @click="
-                    setCourant(r.name);
-                    dialoginfo = true;
-                  " v-bind="attrs" v-on="on">
-                <v-icon transparent> fas fa-info-circle </v-icon>
-              </v-btn>
-            </template>
-            <v-card>
-              <v-card-title class="justify-center"> Bienvenue sur la page du restaurant : {{ selectedName }}
-              </v-card-title>
-              <v-card-actions>
-                <v-btn text @click="dialoginfo = false"> Fermer </v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
+              <v-btn icon @click>
+                <router-link :to="'/detail/' + r._id"><v-icon transparent> fas fa-info-circle </v-icon></router-link>
+              </v-btn>  
         </td>
         <td class="like-btn" @click=ajoutFavoris(r)>
           <v-btn icon>

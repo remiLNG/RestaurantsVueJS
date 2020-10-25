@@ -1,12 +1,47 @@
+
+
 import Vue from 'vue'
 import App from './App.vue'
 import vuetify from './plugins/vuetify'
-import router from'./router'
+import VueRouter from 'vue-router'
+
+
+
+import ListeDesRestaurants from './components/ListeDesRestaurants.vue'
+import Detail from './components/Detail.vue'
+import Favoris from './components/Favoris.vue'
+import Vuetify from 'vuetify/lib'
 
 Vue.config.productionTip = false
+Vue.use(Vuetify)
+Vue.use(VueRouter)
 
+
+
+//On définit les routes 
+
+const router = new VueRouter({
+  routes: [
+    {
+      path :'/',
+      component : ListeDesRestaurants,
+    },
+    {
+      path :'/detail/:id',
+      component : Detail
+    },
+    {
+      path:'/favoris',
+      component : Favoris,
+      props:{
+        
+      }
+    }
+  ],
+  mode :'history'
+});
 new Vue({
-  vuetify,
   router,
-  render: h => h(App)
+  vuetify,
+  render: h => h(App),
 }).$mount('#app')

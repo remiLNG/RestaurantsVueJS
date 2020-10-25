@@ -2,6 +2,9 @@
   <div>
     <div id="fav-img">
     <h1>Liste des favoris</h1>
+    <v-btn>
+        <router-link to="/">Retour</router-link>
+      </v-btn>
     </div>
     <v-footer color="#FAF1ED">
       <v-col class="text-center">
@@ -15,7 +18,11 @@
 </template>
 
 <script>
-export default {};
+export default {
+    props:{
+        
+    }
+};
 </script>
 
 <style scoped>
