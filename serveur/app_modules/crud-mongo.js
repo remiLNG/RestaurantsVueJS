@@ -59,8 +59,73 @@ exports.findRestaurants = function(page, pagesize, name, cuisine, borough, callb
               .count()
               .then((rep) => callback(arr, rep));
           });
-      } else {
-        if (name !== "") {
+      }else if(cuisine !== "" && borough !=="" && name !== ""){  //recherche par nom, cuisine et quartier
+          let query = {
+            cuisine: { $regex: ".*" + cuisine + ".*", $options: "i" },
+            borough: { $regex: ".*" + borough + ".*", $options: "i" },
+            name: { $regex: ".*" + name + ".*", $options: "i" },
+          };
+          db.collection("restaurants")
+            .find(query)
+            .skip(page * pagesize)
+            .limit(pagesize)
+            .toArray()
+            .then((arr) => {
+            db.collection("restaurants")
+              .find(query)
+              .count()
+              .then((rep) => callback(arr, rep));
+            });
+        }else if(cuisine !== "" && borough !==""){ //recherche par cuisine et quartier
+          let query = {
+            cuisine: { $regex: ".*" + cuisine + ".*", $options: "i" },
+            borough: { $regex: ".*" + borough + ".*", $options: "i" },
+          };
+          db.collection("restaurants")
+            .find(query)
+            .skip(page * pagesize)
+            .limit(pagesize)
+            .toArray()
+            .then((arr) => {
+            db.collection("restaurants")
+              .find(query)
+              .count()
+              .then((rep) => callback(arr, rep));
+            });
+        }else if(cuisine !== "" && name !==""){ //recherche par cuisine et nom
+          let query = {
+            cuisine: { $regex: ".*" + cuisine + ".*", $options: "i" },
+            name: { $regex: ".*" + name + ".*", $options: "i" },
+          };
+          db.collection("restaurants")
+            .find(query)
+            .skip(page * pagesize)
+            .limit(pagesize)
+            .toArray()
+            .then((arr) => {
+            db.collection("restaurants")
+              .find(query)
+              .count()
+              .then((rep) => callback(arr, rep));
+            });
+        }else if(name !== "" && borough !==""){ //recherche par nom et quartier
+          let query = {
+            name: { $regex: ".*" + name + ".*", $options: "i" },
+            borough: { $regex: ".*" + borough + ".*", $options: "i" },
+          };
+          db.collection("restaurants")
+            .find(query)
+            .skip(page * pagesize)
+            .limit(pagesize)
+            .toArray()
+            .then((arr) => {
+            db.collection("restaurants")
+              .find(query)
+              .count()
+              .then((rep) => callback(arr, rep));
+            });
+        }
+        else if (name !== "") { //recherche par nom
           let query = {
             name: { $regex: ".*" + name + ".*", $options: "i" },
           };
@@ -75,7 +140,9 @@ exports.findRestaurants = function(page, pagesize, name, cuisine, borough, callb
                 .count()
                 .then((rep) => callback(arr, rep));
             });
-        }else if (cuisine !== "") {
+          
+        }
+        else if (cuisine !== "") { //recherche par cuisine
 			let query = {
 			  cuisine: { $regex: ".*" + cuisine + ".*", $options: "i" },
 			};
@@ -90,7 +157,7 @@ exports.findRestaurants = function(page, pagesize, name, cuisine, borough, callb
 				  .count()
 				  .then((rep) => callback(arr, rep));
 			  });
-      }else if (borough !== "") {
+      }else if (borough !== "") { //recherche par quartier
         let query = {
           borough: { $regex: ".*" + borough + ".*", $options: "i" },
         };
@@ -106,7 +173,7 @@ exports.findRestaurants = function(page, pagesize, name, cuisine, borough, callb
             .then((rep) => callback(arr, rep));
           });
         }
-      }
+      
     } else {
       callback(-1);
     }
