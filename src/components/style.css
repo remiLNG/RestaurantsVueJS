@@ -9,6 +9,7 @@ div {
     margin: 5px;
   }
   
+ 
   .searchByNom,
   .searchByCuisine,
   .searchByQuartier{
@@ -22,6 +23,7 @@ div {
     border-style: hidden;
   }
   
+  
   .h1title {
 
     font-size: 32px !important;
@@ -29,7 +31,7 @@ div {
     letter-spacing: 0.0125rem !important;
     text-align: center;
     flex: auto;
-    padding: 1.5rem;
+    padding: 11.5rem;
     padding-bottom: 1rem;
     color: #f1f3f5;
   }
@@ -57,26 +59,18 @@ div {
     margin: auto;
   }
   .moman{
-    display: block;
-    width: 100px;
-    background-color:lightblue;
-    padding-top: 3rem;
-    padding-right: 13rem;
-    box-sizing: border-box;
-    border-color : black;
-    border-width: 1px;
-    border-style: solid;
-    border-radius: 20px;
-    position: relative;
-    top: 10%;
-    left: 80%;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
   }
 
-  .moman-txt{
-    text-align: center;
+  .moman p{
+    margin-top: 1rem;
+    font-size: large;
   }
 
-
+  .star{
+    margin: 10px;
+  }
   .add-resto{
     margin: 15px;
     color: #32AE87;
@@ -84,8 +78,6 @@ div {
 
 thead{
   background-color:  lightgray;
- 
-
 }
 
 th{
@@ -106,3 +98,9 @@ tfoot{
   text-align: center;
 }
 
+.v-slider__track-container {
+  height: 10px !important;
+}
+.v-slider__track {
+  height: 10px !important;
+}

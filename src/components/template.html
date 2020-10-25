@@ -7,12 +7,6 @@
     </v-app-bar>
   </div>
   <div class="home_img">
-    <div class="moman">
-      <div class="moman-txt">
-        <h3> Restaurant du moment  </h3>
-        <p> {{  randomRestaurantName}} </p>
-      </div>
-    </div>
     <h1 class="h1title">Liste des Restaurants</h1>
     <p class="nom">
       <input class="searchByNom" @input="chercherRestaurants()" placeholder="Recherche par nom" type="text"
@@ -26,6 +20,20 @@
       <input class="searchByQuartier" @input="chercherQuartiers()" placeholder="Recherche par quartier" type="text"
         v-model="nomQuartierRecherche" />
     </p>
+  </div>
+  <div class="moman">
+    <div class="moman-txt">
+      <h2> Restaurant du moment  </h2>
+      <div class="star">
+        <v-icon color="yellow">fas fa-star</v-icon>
+        <v-icon color="yellow">fas fa-star</v-icon>
+        <v-icon color="yellow">fas fa-star</v-icon>
+        <v-icon color="yellow">fas fa-star</v-icon>
+        <v-icon color="yellow">fas fa-star</v-icon>
+      </div>
+      <p> {{randomRestaurantName}} </p>
+      
+    </div>
   </div>
   <div class="add-resto">
     <h2>Ajouter un nouveau restaurant</h2>
@@ -54,6 +62,24 @@
       </v-container>
     </v-form>
   </div>
+  <p> {{nbRestaurantsTotal}} restaurants</p>
+  <div class="slider">
+  <v-container>
+    <v-col cols="12" sm="4">
+      <v-slider
+      @mouseup="getRestaurantsFromServer()"
+      v-model="pagesize"
+      :label="slider.label"
+      :thumb-color="slider.color"
+      thumb-label="always"
+      color="#32AE87"
+      min="1"
+      max="10"
+    ></v-slider>
+      </v-slider>
+    </v-col >
+  </v-container>
+</div>
   <v-simple-table>
     <thead>
       <tr>
@@ -134,10 +160,7 @@
     <v-icon large color="#32AE87"> fas fa-chevron-circle-right</v-icon>
   </v-btn>
   <p>Page {{ page +1 }} sur {{ nbPagesTotal +1 }} </p>
-  <p>Nombre de restaurants : {{ nbRestaurantsTotal }}</p>
-  <p> Nb restaurants par page : <input @input="getRestaurantsFromServer()" type="range" min="1" max="10"
-      v-model="pagesize" />
-  </p>
+ 
   <v-footer color="#FAF1ED">
     <v-col class="text-center">
       <p> Projet Buffa - Fabre-Sauterey Guilhem - Longin Rémi - {{ new Date().getFullYear() }} </p>

@@ -27,6 +27,7 @@ export default {
       selectedID: "",
       favoris: [],
       columnHeaders: ["Nom", "Cuisine", "Quartier", "Details", " ", " "],
+      slider: { label: 'Restaurants par page',color: '#32AE87' }
     };
   },
   mounted() {
