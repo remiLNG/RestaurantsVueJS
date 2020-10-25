@@ -1,8 +1,6 @@
-<template src="./template.html">
-</template>
+<template src="./template.html"></template>
 
 <style src="./style.css">
-
 </style>
 <script>
 import _ from "lodash";
@@ -13,6 +11,7 @@ export default {
       restaurants: [],
       nom: "",
       cuisine: "",
+      borough: "",
       nbRestaurantsTotal: 0,
       page: 0,
       pagesize: 10,
@@ -20,39 +19,31 @@ export default {
       msg: "",
       nomRestauRecherche: "",
       nomCuisineRecherche: "",
+      nomQuartierRecherche: "",
       dialogtrash: false,
       dialoginfo: false,
       addConfirm: false,
       selectedName: "",
       selectedID: "",
       favoris: [],
-      columnHeaders: [
-        "Nom",
-        "Cuisine",
-        "Quartier",
-        "Details",
-        " ",
-        " "
-      ],
+      columnHeaders: ["Nom", "Cuisine", "Quartier", "Details", " ", " "],
     };
   },
   mounted() {
     this.getRestaurantsFromServer();
-
   },
-  computed:{
-    randomRestaurantName(){
-      if(this.restaurants.length > 0){
-         const r =  Math.floor(Math.random()*this.restaurants.length);
-         const restoName = this.restaurants[r].name;
-         return restoName
+  computed: {
+    randomRestaurantName() {
+      if (this.restaurants.length > 0) {
+        const r = Math.floor(Math.random() * this.restaurants.length);
+        const restoName = this.restaurants[r].name;
+        return restoName;
       }
       return "toto";
-  
-    }
+    },
   },
   methods: {
-    ajoutFavoris(rid){
+    ajoutFavoris(rid) {
       this.favoris.push(rid.name);
       console.log(this.favoris);
     },
@@ -67,14 +58,40 @@ export default {
       this.page++;
       this.getRestaurantsFromServer();
     },
-    pageder(){
-      if(this.page === this.nbPagesTotal) return;
-      this.page += this.nbPagesTotal;
+    pageder() {
+      if (this.page === this.nbPagesTotal) return;
+      if (this.page >= this.nbPagesTotal){
+        this.page = this.nbPagesTotal
+      }
+      this.page += this.nbPagesTotal - this.page;
       this.getRestaurantsFromServer();
     },
-    pageprems(){
+    pageprems() {
       this.page = 0;
       this.getRestaurantsFromServer();
+    },
+    getQuartiersFromServer() {
+      let url = "http://localhost:8080/api/restaurants?";
+      url += "page=" + this.page;
+      url += "&pagesize=" + this.pagesize;
+      url += "&borough=" + this.nomQuartierRecherche;
+
+      fetch(url)
+        .then((responseJSON) => {
+          // arrow functions, conserve le bon "this"
+          // la réponse est en JSON, on la convertit avec la ligne suivante
+          responseJSON.json().then((resJS) => {
+            // Maintenant resJS est un vrai objet JavaScript
+            this.restaurants = resJS.data;
+            this.nbRestaurantsTotal = resJS.count;
+            this.nbPagesTotal = Math.round(
+              this.nbRestaurantsTotal / this.pagesize
+            );
+          });
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
     },
     getCuisinesFromServer() {
       let url = "http://localhost:8080/api/restaurants?";
@@ -122,6 +139,10 @@ export default {
           console.log(err);
         });
     },
+     chercherQuartiers: _.debounce(function () {
+      // appelée que si on n'a pas tapé de touches pendant un certain délai
+      this.getQuartiersFromServer();
+    }, 300),
     chercherRestaurants: _.debounce(function () {
       // appelée que si on n'a pas tapé de touches pendant un certain délai
       this.getRestaurantsFromServer();
@@ -155,9 +176,6 @@ export default {
     setIDcourant(id) {
       this.selectedID = id;
     },
-    setRestoAlea(){
-      return this.resJS.data[Math.floor(Math.random()*this.nbRestaurantsTotal)].name;
-    },
     ajouterRestaurant(event) {
       // Récupération du formulaire. Pas besoin de document.querySelector
       // ou document.getElementById puisque c'est le formulaire qui a généré
@@ -189,6 +207,7 @@ export default {
 
       this.nom = "";
       this.cuisine = "";
+      this.borough = "";
     },
     getColor(index) {
       return index % 2 ? "#FAF1ED" : "#FAF1ED";

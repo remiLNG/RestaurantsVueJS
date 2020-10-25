@@ -3,13 +3,15 @@ div {
     font-family: Arial, Tahoma, Bitstream Vera Sans, sans-serif;
   }
   .nom,
-  .cuisine {
+  .cuisine,
+  .quartier{
     display: inline-block;
     margin: 5px;
   }
   
   .searchByNom,
-  .searchByCuisine {
+  .searchByCuisine,
+  .searchByQuartier{
     border-radius: 10px;
     background-color: #f1f3f5;
     padding-left: 1rem;
@@ -27,11 +29,11 @@ div {
     letter-spacing: 0.0125rem !important;
     text-align: center;
     flex: auto;
-    padding: 2rem;
+    padding: 1.5rem;
     padding-bottom: 1rem;
     color: #f1f3f5;
   }
-  .searchByNom:focus, .searchByCuisine:focus {
+  .searchByNom:focus, .searchByCuisine:focus, .searchByQuartier:focus {
     line-height: 0px;
     outline: -webkit-focus-ring-color auto 0px;
 }
@@ -89,6 +91,7 @@ thead{
 th{
   color:#32AE87 !important;
   text-align: center !important;
+  font-size: large !important;
 
 }
 

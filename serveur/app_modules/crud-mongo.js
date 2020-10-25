@@ -42,13 +42,13 @@ exports.countRestaurants = function(name, callback) {
   });
 };
 
-exports.findRestaurants = function(page, pagesize, name, cuisine, callback) {
+exports.findRestaurants = function(page, pagesize, name, cuisine, borough, callback) {
   MongoClient.connect(url, function(err, client) {
     var db = client.db(dbName);
 
     console.log("db " + db);
     if (!err) {
-      if (name == "" && cuisine == "") {
+      if (name == "" && cuisine == "" && borough == "") {
         db.collection("restaurants")
           .find()
           .skip(page * pagesize)
@@ -90,7 +90,22 @@ exports.findRestaurants = function(page, pagesize, name, cuisine, callback) {
 				  .count()
 				  .then((rep) => callback(arr, rep));
 			  });
-		  }
+      }else if (borough !== "") {
+        let query = {
+          borough: { $regex: ".*" + borough + ".*", $options: "i" },
+        };
+        db.collection("restaurants")
+          .find(query)
+          .skip(page * pagesize)
+          .limit(pagesize)
+          .toArray()
+          .then((arr) => {
+          db.collection("restaurants")
+            .find(query)
+            .count()
+            .then((rep) => callback(arr, rep));
+          });
+        }
       }
     } else {
       callback(-1);
@@ -146,6 +161,7 @@ exports.createRestaurant = function(formData, callback) {
       let toInsert = {
         name: formData.nom,
         cuisine: formData.cuisine,
+        borough: formData.borough,
       };
       console.dir(JSON.stringify(toInsert));
       db.collection("restaurants").insert(toInsert, function(err, insertedId) {
@@ -189,6 +205,7 @@ exports.updateRestaurant = function(id, formData, callback) {
       let newvalues = {
         name: formData.nom,
         cuisine: formData.cuisine,
+        borough: formData.borough,
       };
 
       db.collection("restaurants").replaceOne(myquery, newvalues, function(

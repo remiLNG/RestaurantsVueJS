@@ -22,6 +22,10 @@
       <input class="searchByCuisine" @input="chercherCuisines()" placeholder="Recherche par cuisine" type="text"
         v-model="nomCuisineRecherche" />
     </p>
+    <p class="quartier">
+      <input class="searchByQuartier" @input="chercherQuartiers()" placeholder="Recherche par quartier" type="text"
+        v-model="nomQuartierRecherche" />
+    </p>
   </div>
   <div class="add-resto">
     <h2>Ajouter un nouveau restaurant</h2>
@@ -32,9 +36,11 @@
           </v-text-field>
           <v-text-field name="cuisine" v-model="cuisine" filled rounded label="Type cuisine" clearable type="text"
             required></v-text-field>
+            <v-text-field name="borough" v-model="borough" filled rounded label="Nom quartier" clearable type="text"
+            required></v-text-field>
           <v-dialog v-model="addConfirm" width="500">
             <template v-slot:activator="{ on, attrs }">
-              <v-btn :disabled="nom.length < 1 || cuisine.length < 1" small type="submit" v-bind="attrs" v-on="on">
+              <v-btn :disabled="nom.length < 1 || cuisine.length < 1 || borough.length < 1" small type="submit" v-bind="attrs" v-on="on">
                 Ajouter </v-btn>
             </template>
             <v-card>
@@ -51,7 +57,7 @@
   <v-simple-table>
     <thead>
       <tr>
-        <th v-for="(header, i) in columnHeaders" :key="i" @click="sort(header)"> 
+        <th v-for="(header, i) in columnHeaders" :key="i"> 
           {{header}} 
         </th>
       </tr>
