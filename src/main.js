@@ -25,17 +25,19 @@ const router = new VueRouter({
     {
       path :'/',
       component : ListeDesRestaurants,
+      name :'ListeDesRestaurants',
+      props:true,
     },
     {
       path :'/detail/:id',
-      component : Detail
+      component : Detail,
+      props:true,
     },
     {
       path:'/favoris',
       component : Favoris,
-      props:{
-        
-      }
+      name: 'favoris',
+      props:true,
     }
   ],
   mode :'history'

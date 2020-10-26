@@ -6,6 +6,7 @@
 import _ from "lodash";
 export default {
   name: "ListeDesRestaurants",
+  props:["fav1"],
   data: function () {
     return {
       restaurants: [],
@@ -45,7 +46,7 @@ export default {
   },
   methods: {
     ajoutFavoris(rid) {
-      this.favoris.push(rid.name);
+      this.favoris.push(rid);
       console.log(this.favoris);
     },
     pagePrecedente() {

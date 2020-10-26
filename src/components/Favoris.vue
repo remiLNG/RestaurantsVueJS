@@ -1,9 +1,37 @@
 <template>
   <div>
     <div id="fav-img">
-    <h1>Liste des favoris</h1>
-    <v-btn>
-        <router-link to="/">Retour</router-link>
+      <h1>Liste des favoris </h1>
+     
+      <v-simple-table v-if="fav && fav.length>0">
+        <thead v-if="fav">
+          <tr>
+            <th>Nom</th>
+            <th>Cuisine</th>
+            <th>Detail</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(f, i) in fav" :key="i">
+            <td>{{ fav[i].name }}</td>
+            <td>{{ fav[i].cuisine }}</td>
+            <td class="info-btn">
+              <v-btn icon>
+                <router-link :to="'/detail/' + fav[i]._id"
+                  ><v-icon transparent>
+                    fas fa-info-circle
+                  </v-icon></router-link
+                >
+              </v-btn>
+            </td>
+          </tr>
+        </tbody>
+      </v-simple-table>
+      <v-btn>
+        <router-link
+          :to="{ name: 'ListeDesRestaurants', params: { fav1: fav } }"
+          >Retour</router-link
+        >
       </v-btn>
     </div>
     <v-footer color="#FAF1ED">
@@ -19,9 +47,7 @@
 
 <script>
 export default {
-    props:{
-        
-    }
+  props: ["fav"],
 };
 </script>
 
@@ -40,15 +66,15 @@ div {
   background-position-y: -200px;
 }
 
-h1{
-    font-family: Arial, Tahoma, Bitstream Vera Sans, sans-serif;
-    font-size: 32px !important;
-    line-height: 2em;
-    letter-spacing: 0.0125rem !important;
-    text-align: center;
-    flex: auto;
-    padding: 10rem;
-    padding-bottom: 1rem;
-    color: #f1f3f5;
+h1 {
+  font-family: Arial, Tahoma, Bitstream Vera Sans, sans-serif;
+  font-size: 32px !important;
+  line-height: 2em;
+  letter-spacing: 0.0125rem !important;
+  text-align: center;
+  flex: auto;
+  padding: 10rem;
+  padding-bottom: 1rem;
+  color: #f1f3f5;
 }
 </style>
