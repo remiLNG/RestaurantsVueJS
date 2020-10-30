@@ -1,12 +1,20 @@
 <template>
-  <div>
+  <div v-if="restaurant">
+     <div class="toolbar">
+      <v-app-bar color="white" dense flat>
+        <v-btn>
+          <router-link
+            :to="{ name: 'ListeDesRestaurants', params: { fav1: fav } }"
+            >Retour</router-link
+          >
+        </v-btn>
+      </v-app-bar>
+    </div>
     <div>Detail d'un restaurant qui a pour id : {{ id }}</div>
     <div>Nom : {{ restaurant.name }}</div>
     <div>Cuisine : {{ restaurant.cuisine }}</div>
     <div>{{afficheimg()}}</div>
-    <v-btn>
-      <router-link to="/">Retour</router-link>
-    </v-btn>
+
     <v-footer color="#FAF1ED">
       <v-col class="text-center">
         <p>
@@ -21,7 +29,7 @@
 <script>
 export default {
   name: "Detail",
-  props: {},
+  props: ["fav"],
   computed: {
     id() {
       return this.$route.params.id;
@@ -46,8 +54,8 @@ export default {
     afficheimg(){
       let x = ""
       if(this.restaurant.cuisine == 'American'){
-        console.log("ameriqueeee");
-        x = "america fuck yeah"
+        console.log("ameriqueeee"); 
+        x = "america fuck yeah" //mdrr
       }
       return x
     }

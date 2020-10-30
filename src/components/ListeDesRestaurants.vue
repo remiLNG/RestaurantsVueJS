@@ -6,7 +6,7 @@
 import _ from "lodash";
 export default {
   name: "ListeDesRestaurants",
-  props:["fav1"],
+  props: ["fav1"],
   data: function () {
     return {
       restaurants: [],
@@ -27,8 +27,9 @@ export default {
       selectedName: "",
       selectedID: "",
       favoris: [],
+      bestResto: "",
       columnHeaders: ["Nom", "Cuisine", "Quartier", "Details", " ", " "],
-      slider: { label: 'Restaurants par page',color: '#32AE87' }
+      slider: { label: "Restaurants par page", color: "#32AE87" },
     };
   },
   mounted() {
@@ -38,10 +39,16 @@ export default {
     randomRestaurantName() {
       if (this.restaurants.length > 0) {
         const r = Math.floor(Math.random() * this.restaurants.length);
+        const rgrade =  Math.floor(Math.random() * this.restaurants[r].grades.length);
+        const note = this.restaurants[r].grades[rgrade].grade;
         const restoName = this.restaurants[r].name;
+        if (note != "A") {
+          this.randomRestaurantName();
+        }
         return restoName;
       }
       return "toto";
+      
     },
   },
   methods: {
@@ -62,8 +69,8 @@ export default {
     },
     pageder() {
       if (this.page === this.nbPagesTotal) return;
-      if (this.page >= this.nbPagesTotal){
-        this.page = this.nbPagesTotal
+      if (this.page >= this.nbPagesTotal) {
+        this.page = this.nbPagesTotal;
       }
       this.page += this.nbPagesTotal - this.page;
       this.getRestaurantsFromServer();
@@ -123,15 +130,15 @@ export default {
       url += "page=" + this.page;
       url += "&pagesize=" + this.pagesize;
       url += "&name=" + this.nomRestauRecherche;
-      if(this.nomQuartierRecherche != ""){
-          url += "&borough=" + this.nomQuartierRecherche;
-          console.log("nom quartier ajouté " + this.nomQuartierRecherche)
+      if (this.nomQuartierRecherche != "") {
+        url += "&borough=" + this.nomQuartierRecherche;
+        console.log("nom quartier ajouté " + this.nomQuartierRecherche);
       }
-      if(this.nomCuisineRecherche != ""){
-         url += "&cuisine=" + this.nomCuisineRecherche;
-         console.log("nom cuisine ajouté " + this.nomCuisineRecherche)
+      if (this.nomCuisineRecherche != "") {
+        url += "&cuisine=" + this.nomCuisineRecherche;
+        console.log("nom cuisine ajouté " + this.nomCuisineRecherche);
       }
-    
+
       fetch(url)
         .then((responseJSON) => {
           // arrow functions, conserve le bon "this"
@@ -149,7 +156,7 @@ export default {
           console.log(err);
         });
     },
-     chercherQuartiers: _.debounce(function () {
+    chercherQuartiers: _.debounce(function () {
       // appelée que si on n'a pas tapé de touches pendant un certain délai
       this.getQuartiersFromServer();
     }, 300),

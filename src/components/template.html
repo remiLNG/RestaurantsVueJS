@@ -67,7 +67,7 @@
   <v-container>
     <v-col cols="12" sm="4">
       <v-slider
-      @mouseup="getRestaurantsFromServer()"
+      @click="getRestaurantsFromServer()"
       v-model="pagesize"
       :label="slider.label"
       :thumb-color="slider.color"

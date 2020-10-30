@@ -17,7 +17,6 @@ Vue.use(Vuetify)
 Vue.use(VueRouter)
 
 
-
 //On définit les routes 
 
 const router = new VueRouter({
