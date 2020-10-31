@@ -1,20 +1,23 @@
 <template>
   <div v-if="restaurant">
-     <div class="toolbar">
-      <v-app-bar color="white" dense flat>
-        <v-btn>
-          <router-link
-            :to="{ name: 'ListeDesRestaurants', params: { fav1: fav } }"
-            >Retour</router-link
-          >
-        </v-btn>
-      </v-app-bar>
-    </div>
     <div>Detail d'un restaurant qui a pour id : {{ id }}</div>
     <div>Nom : {{ restaurant.name }}</div>
     <div>Cuisine : {{ restaurant.cuisine }}</div>
-    <div>{{afficheimg()}}</div>
-
+    <div id="mapid" ref="mapElement"></div>
+    <div>
+      <div class="info" style="height: 15%, width: 15%;">
+                      <span>Center: {{ center }}</span>
+                      <span>Zoom: {{ zoom }}</span>
+                      <span>Bounds: {{ bounds }}</span>
+                    </div>
+      <l-map style="height: 500px; width: 500px" :zoom = "zoom" :center = "center" @update:zoom = "zoomUpdated" @update:center = "centerUpdated" @update:bounds = "boundsUpdated">
+        <l-tile-layer :url = "url" ></l-tile-layer>
+        <l-marker :lat-lng = "LMarker"></l-marker>
+      </l-map>
+    </div>
+    <v-btn>
+      <router-link to="/">Retour</router-link>
+    </v-btn>
     <v-footer color="#FAF1ED">
       <v-col class="text-center">
         <p>
@@ -22,11 +25,16 @@
           {{ new Date().getFullYear() }}
         </p>
       </v-col>
-    </v-footer> 
+    </v-footer>
   </div>
 </template>
 
+
 <script>
+
+import { latLng } from "leaflet";
+import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
+
 export default {
   name: "Detail",
   props: ["fav"],
@@ -35,9 +43,21 @@ export default {
       return this.$route.params.id;
     },
   },
+  components:{
+    LMap,
+    LTileLayer,
+    LMarker
+  },
   data: function () {
     return {
       restaurant: null, //initialiser la variable restaurant
+            url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+
+      center: latLng(this.restaurant.adresse[1],this.restaurant.adresse[2]),
+      bounds: null,
+      zoom: 13,
+      LMarker: latLng(this.restaurant.adresse[1],this.restaurant.adresse[2]),
+    
     };
   },
   mounted() {
@@ -49,16 +69,28 @@ export default {
       .then((data) => {
         this.restaurant = data.restaurant;
       });
+      this.center = latLng(this.restaurant.adresse[1],this.restaurant.adresse[2])
+      this.LMarker = this.center
+
   },
   methods: {
-    afficheimg(){
-      let x = ""
-      if(this.restaurant.cuisine == 'American'){
-        console.log("ameriqueeee"); 
-        x = "america fuck yeah" //mdrr
+    afficheimg() {
+      let x = "";
+      if (this.restaurant.cuisine == "American") {
+        console.log("ameriqueeee");
+        x = "america fuck yeah";
       }
-      return x
-    }
+      return x;
+    },
+     zoomUpdated(zoom) {
+      this.zoom = zoom;
+    },
+    centerUpdated(center) {
+      this.center = center;
+    },
+    boundsUpdated(bounds) {
+      this.bounds = bounds;
+    },
   },
 };
 </script>

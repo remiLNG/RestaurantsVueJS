@@ -12,6 +12,10 @@ import Detail from './components/Detail.vue'
 import Favoris from './components/Favoris.vue'
 import Vuetify from 'vuetify/lib'
 
+
+import 'leaflet/dist/leaflet.css';
+
+
 Vue.config.productionTip = false
 Vue.use(Vuetify)
 Vue.use(VueRouter)
