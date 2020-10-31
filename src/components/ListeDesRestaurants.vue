@@ -27,7 +27,6 @@ export default {
       selectedName: "",
       selectedID: "",
       favoris: [],
-      bestResto: "",
       columnHeaders: ["Nom", "Cuisine", "Quartier", "Details", " ", " "],
       slider: { label: "Restaurants par page", color: "#32AE87" },
     };
@@ -36,16 +35,16 @@ export default {
     this.getRestaurantsFromServer();
   },
   computed: {
+    
     randomRestaurantName() {
       if (this.restaurants.length > 0) {
         const r = Math.floor(Math.random() * this.restaurants.length);
         const rgrade =  Math.floor(Math.random() * this.restaurants[r].grades.length);
         const note = this.restaurants[r].grades[rgrade].grade;
         const restoName = this.restaurants[r].name;
-        if (note != "A") {
-          this.randomRestaurantName();
+        while (note == "A") {
+           return restoName;
         }
-        return restoName;
       }
       return "toto";
       

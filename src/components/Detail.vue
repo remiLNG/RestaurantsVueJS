@@ -53,10 +53,10 @@ export default {
       restaurant: null, //initialiser la variable restaurant
             url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
 
-      center: latLng(this.restaurant.adresse[1],this.restaurant.adresse[2]),
+      center: latLng(47.41322, -1.219482),
       bounds: null,
       zoom: 13,
-      LMarker: latLng(this.restaurant.adresse[1],this.restaurant.adresse[2]),
+      LMarker: latLng(47.41322, -1.219482),
     
     };
   },
@@ -68,10 +68,10 @@ export default {
       })
       .then((data) => {
         this.restaurant = data.restaurant;
+        this.center = latLng(this.restaurant.address.coord[1],this.restaurant.address.coord[0])
+        this.LMarker = this.center
       });
-      this.center = latLng(this.restaurant.adresse[1],this.restaurant.adresse[2])
-      this.LMarker = this.center
-
+   
   },
   methods: {
     afficheimg() {
