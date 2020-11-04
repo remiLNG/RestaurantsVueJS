@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="toolbar">
-      <v-app-bar color="white" dense flat>
+      <v-app-bar color="#FAF1ED" dense flat>
         <v-btn>
           <router-link
             :to="{ name: 'ListeDesRestaurants', params: { fav1: fav } }"
