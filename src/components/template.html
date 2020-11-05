@@ -31,7 +31,7 @@
         <v-icon color="yellow">fas fa-star</v-icon>
         <v-icon color="yellow">fas fa-star</v-icon>
       </div>
-      <p> {{  randomRestaurantName }} </p>
+      <!-- <p> {{  randomRestaurantName }} </p> -->
       
     </div>
   </div>
@@ -99,10 +99,20 @@
                 <router-link :to="'/detail/' + r._id"><v-icon transparent> fas fa-info-circle </v-icon></router-link>
               </v-btn>  
         </td>
-        <td class="like-btn" @click=ajoutFavoris(r)>
-          <v-btn icon>
-            <v-icon>mdi-heart</v-icon>
-          </v-btn>
+        <td class="like-btn" >
+          <v-dialog :retain-focus="false" v-model="addFav" width="500">
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn icon @click=ajoutFavoris(r) v-bind="attrs" v-on="on" type="submit">
+                <v-icon>mdi-heart</v-icon>
+              </v-btn>
+            </template>
+            <v-card>
+              <v-card-title class="justify-center">Restaurant ajouté à vos favoris !</v-card-title>
+              <v-card-actions class="justify-center">
+                <v-btn color="primary" text @click="addFav= false"> OK </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
         </td>
         <td class="trash-btn">
           <v-dialog :retain-focus="false" v-model="dialogtrash" persistent max-width="290">

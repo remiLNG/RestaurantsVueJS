@@ -8,58 +8,135 @@
             >Retour</router-link
           >
         </v-btn>
-         <v-btn class="fav-btn">
-        <router-link :to="{name: 'favoris',params:{fav: this.favoris}}">Favoris</router-link>
-      </v-btn>
+        <v-btn class="fav-btn">
+          <router-link :to="{ name: 'favoris', params: { fav: this.favoris } }"
+            >Favoris</router-link
+          >
+        </v-btn>
       </v-app-bar>
     </div>
-    <!-- <div>Detail d'un restaurant qui a pour id : {{ id }}</div> -->
     <div>
-      <h1>Bienvenue au restaurant : {{ restaurant.name }}</h1>
+      <h1>Bienvenue au restaurant {{ restaurant.name }}</h1>
     </div>
-   
-    <div class="main">
 
-    <div class="emplacement">
-      <div class="titles">
-        <h3>Emplacement et coordonnées</h3>
-      </div>
-      <div class="map">
-        <!-- <div class="info" style="height: 15%, width: 15%;">
-                      <span>Center: {{ center }}</span>
-                      <span>Zoom: {{ zoom }}</span>
-                      <span>Bounds: {{ bounds }}</span>
-                    </div> -->
-        <l-map
-          style="height: 400px; width: 400px; margin: auto"
-          :zoom="zoom"
-          :center="center"
-          @update:zoom="zoomUpdated"
-          @update:center="centerUpdated"
-          @update:bounds="boundsUpdated"
-        >
-          <l-tile-layer :url="url"></l-tile-layer>
-          <l-marker :lat-lng="LMarker"></l-marker>
-        </l-map>
-      </div>
-      <v-icon class="icon" dense color="red">fas fa-map-marker-alt </v-icon>
-      {{ restaurant.borough }}, {{ restaurant.address.zipcode }}
-      {{ restaurant.address.street }}, Batiment
-      {{ restaurant.address.building }}
+    <div class="main">
+      <v-row justify="center">
+        <v-col cols="8" sm="3">
+          <v-card>
+            <v-card-title class="teal accent-4">
+              <span class="headline white--text">Emplacement</span>
+            </v-card-title>
+
+            <v-list>
+              <v-list-item>
+                <v-list-item-action>
+                  <div class="map">
+                    <l-map
+                      style="height: 400px; width: 400px; margin: auto"
+                      :zoom="zoom"
+                      :center="center"
+                      @update:zoom="zoomUpdated"
+                      @update:center="centerUpdated"
+                      @update:bounds="boundsUpdated"
+                    >
+                      <l-tile-layer :url="url"></l-tile-layer>
+                      <l-marker :lat-lng="LMarker"></l-marker>
+                    </l-map>
+                  </div>
+                </v-list-item-action>
+              </v-list-item>
+
+              <v-list-item>
+                <v-list-item-action>
+                  <v-list-item-content>
+                    <v-list-item-title>
+                      <v-icon class="icon">fas fa-map-marker-alt </v-icon>
+                      {{ restaurant.borough }},
+                      {{ restaurant.address.zipcode }}
+                      {{ restaurant.address.street }}, Batiment
+                      {{ restaurant.address.building }}
+                    </v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item-action>
+              </v-list-item>
+            </v-list>
+          </v-card>
+        </v-col>
+      </v-row>
+
+      <v-row justify="center">
+        <v-col cols="8" sm="3">
+          <v-card>
+            <v-card-title class="teal accent-4">
+              <span class="headline white--text">Menu</span>
+            </v-card-title>
+
+            <v-img
+              src="../assets/menu.jpg"
+              height="200px"
+              position="center 10%"
+            ></v-img>
+          </v-card>
+        </v-col>
+      </v-row>
+
+      <v-row justify="center">
+        <v-col cols="8" sm="3">
+          <v-card>
+            <v-card-title class="teal accent-4">
+              <span class="headline white--text">Détails</span>
+            </v-card-title>
+
+            <v-list>
+              <v-subheader> Fourchette de prix </v-subheader>
+              <v-list-item>
+                <v-list-item-action>
+                  <v-icon>fas fa-coins</v-icon>
+                </v-list-item-action>
+                <v-list-item-content>
+                  <v-list-item-title> 1 milliard de pognon</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+
+              <v-divider inset></v-divider>
+              <v-subheader> Cuisine</v-subheader>
+              <v-list-item>
+                <v-list-item-action>
+                  <v-icon>fas fa-utensils</v-icon>
+                </v-list-item-action>
+
+                <v-list-item-content>
+                  <v-list-item-title>{{
+                    restaurant.cuisine
+                  }}</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+
+              <v-divider inset></v-divider>
+              <v-subheader> Note</v-subheader>
+              <v-list-item>
+                <v-list-item-action>
+                  <v-icon>fas fa-pen</v-icon>
+                </v-list-item-action>
+
+                <v-list-item-content>
+                  <v-list-item-title>
+                    {{ restaurant.grades[1].grade }}
+                  </v-list-item-title>
+                </v-list-item-content>
+                <v-icon small color="#32AE87">fas fa-star</v-icon>
+                <v-icon small color="#32AE87">fas fa-star</v-icon>
+                <v-icon small color="#32AE87">fas fa-star</v-icon>
+                <v-icon small color="#32AE87">fas fa-star</v-icon>
+                <v-icon small color="#32AE87">fas fa-star</v-icon>
+              </v-list-item>
+            </v-list>
+
+            <v-img src="../assets/detail.jpg" height="200px"></v-img>
+          </v-card>
+        </v-col>
+      </v-row>
     </div>
-    <div class="detail">
-      <h3>Detail</h3>
-      <div class="detail-content">
-         Cuisine : {{ restaurant.cuisine }}
-          <br>
-         Note : {{restaurant.grades[1].grade}}
-      </div>
-    </div>
-    <div class="menu">
-      <h3>Menu</h3>
-      <div class="menu-content"></div>
-    </div>
-      </div>
     <v-footer color="#FAF1ED">
       <v-col class="text-center">
         <p>
@@ -143,7 +220,7 @@ div {
   font-family: Arial, Tahoma, Bitstream Vera Sans, sans-serif;
 }
 
-.main{
+.main {
   background-color: lightblue;
 }
 
@@ -172,10 +249,9 @@ div {
   height: 400px;
   width: 400px;
   margin: auto;
-
 }
 
-.fav-btn{
+.fav-btn {
   margin-left: 10px;
 }
 </style>
