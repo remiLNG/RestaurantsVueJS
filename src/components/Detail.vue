@@ -20,122 +20,126 @@
     </div>
 
     <div class="main">
-      <v-row justify="center">
-        <v-col cols="8" sm="3">
-          <v-card>
-            <v-card-title class="teal accent-4">
-              <span class="headline white--text">Emplacement</span>
-            </v-card-title>
+      <v-container>
+        <v-row>
+          <v-col cols="4">
+            <div class="emplacement">
+              <v-card>
+                <v-card-title class="teal accent-4">
+                  <span class="headline white--text">Emplacement</span>
+                </v-card-title>
 
-            <v-list>
-              <v-list-item>
-                <v-list-item-action>
-                  <div class="map">
-                    <l-map
-                      style="height: 400px; width: 400px; margin: auto"
-                      :zoom="zoom"
-                      :center="center"
-                      @update:zoom="zoomUpdated"
-                      @update:center="centerUpdated"
-                      @update:bounds="boundsUpdated"
-                    >
-                      <l-tile-layer :url="url"></l-tile-layer>
-                      <l-marker :lat-lng="LMarker"></l-marker>
-                    </l-map>
-                  </div>
-                </v-list-item-action>
-              </v-list-item>
+                <v-list>
+                  <v-list-item>
+                    <v-list-item-action>
+                      <div class="map">
+                        <l-map
+                          style="height: 30rem;  width: 30rem;"
+                          :zoom="zoom"
+                          :center="center"
+                          @update:zoom="zoomUpdated"
+                          @update:center="centerUpdated"
+                          @update:bounds="boundsUpdated"
+                        >
+                          <l-tile-layer :url="url"></l-tile-layer>
+                          <l-marker :lat-lng="LMarker"></l-marker>
+                        </l-map>
+                      </div>
+                    </v-list-item-action>
+                  </v-list-item>
 
-              <v-list-item>
-                <v-list-item-action>
-                  <v-list-item-content>
-                    <v-list-item-title>
-                      <v-icon class="icon">fas fa-map-marker-alt </v-icon>
-                      {{ restaurant.borough }},
-                      {{ restaurant.address.zipcode }}
-                      {{ restaurant.address.street }}, Batiment
-                      {{ restaurant.address.building }}
-                    </v-list-item-title>
-                  </v-list-item-content>
-                </v-list-item-action>
-              </v-list-item>
-            </v-list>
-          </v-card>
-        </v-col>
-      </v-row>
+                  <v-list-item>
+                    <v-list-item-action>
+                      <v-list-item-content>
+                        <v-list-item-title>
+                          <v-icon class="icon">fas fa-map-marker-alt </v-icon>
+                          {{ restaurant.borough }},
+                          {{ restaurant.address.zipcode }}
+                          {{ restaurant.address.street }}, Batiment
+                          {{ restaurant.address.building }}
+                        </v-list-item-title>
+                      </v-list-item-content>
+                    </v-list-item-action>
+                  </v-list-item>
+                </v-list>
+              </v-card>
+            </div>
+          </v-col>
+          <v-col cols="4">
+            <div class="menu">
+              <v-card>
+                <v-card-title class="teal accent-4">
+                  <span class="headline white--text">Menu</span>
+                </v-card-title>
 
-      <v-row justify="center">
-        <v-col cols="8" sm="3">
-          <v-card>
-            <v-card-title class="teal accent-4">
-              <span class="headline white--text">Menu</span>
-            </v-card-title>
+                <v-img
+                  src="../assets/menu.jpg"
+                  height="200px"
+                  position="center 10%"
+                ></v-img>
+              </v-card>
+            </div>
+          </v-col>
+          <v-col cols="4">
+            <div class="detail">
+              <v-card>
+                <v-card-title class="teal accent-4">
+                  <span class="headline white--text">Détails</span>
+                </v-card-title>
 
-            <v-img
-              src="../assets/menu.jpg"
-              height="200px"
-              position="center 10%"
-            ></v-img>
-          </v-card>
-        </v-col>
-      </v-row>
+                <v-list>
+                  <v-subheader> Fourchette de prix </v-subheader>
+                  <v-list-item>
+                    <v-list-item-action>
+                      <v-icon>fas fa-coins</v-icon>
+                    </v-list-item-action>
+                    <v-list-item-content>
+                      <v-list-item-title>
+                        1 milliard de pognon</v-list-item-title
+                      >
+                    </v-list-item-content>
+                  </v-list-item>
 
-      <v-row justify="center">
-        <v-col cols="8" sm="3">
-          <v-card>
-            <v-card-title class="teal accent-4">
-              <span class="headline white--text">Détails</span>
-            </v-card-title>
+                  <v-divider inset></v-divider>
+                  <v-subheader> Cuisine</v-subheader>
+                  <v-list-item>
+                    <v-list-item-action>
+                      <v-icon>fas fa-utensils</v-icon>
+                    </v-list-item-action>
 
-            <v-list>
-              <v-subheader> Fourchette de prix </v-subheader>
-              <v-list-item>
-                <v-list-item-action>
-                  <v-icon>fas fa-coins</v-icon>
-                </v-list-item-action>
-                <v-list-item-content>
-                  <v-list-item-title> 1 milliard de pognon</v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
+                    <v-list-item-content>
+                      <v-list-item-title>{{
+                        restaurant.cuisine
+                      }}</v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
 
-              <v-divider inset></v-divider>
-              <v-subheader> Cuisine</v-subheader>
-              <v-list-item>
-                <v-list-item-action>
-                  <v-icon>fas fa-utensils</v-icon>
-                </v-list-item-action>
+                  <v-divider inset></v-divider>
+                  <v-subheader> Note</v-subheader>
+                  <v-list-item>
+                    <v-list-item-action>
+                      <v-icon>fas fa-pen</v-icon>
+                    </v-list-item-action>
 
-                <v-list-item-content>
-                  <v-list-item-title>{{
-                    restaurant.cuisine
-                  }}</v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
+                    <v-list-item-content>
+                      <v-list-item-title>
+                        {{ restaurant.grades[1].grade }}
+                      </v-list-item-title>
+                    </v-list-item-content>
+                    <v-icon small color="#32AE87">fas fa-star</v-icon>
+                    <v-icon small color="#32AE87">fas fa-star</v-icon>
+                    <v-icon small color="#32AE87">fas fa-star</v-icon>
+                    <v-icon small color="#32AE87">fas fa-star</v-icon>
+                    <v-icon small color="#32AE87">fas fa-star</v-icon>
+                  </v-list-item>
+                </v-list>
 
-              <v-divider inset></v-divider>
-              <v-subheader> Note</v-subheader>
-              <v-list-item>
-                <v-list-item-action>
-                  <v-icon>fas fa-pen</v-icon>
-                </v-list-item-action>
-
-                <v-list-item-content>
-                  <v-list-item-title>
-                    {{ restaurant.grades[1].grade }}
-                  </v-list-item-title>
-                </v-list-item-content>
-                <v-icon small color="#32AE87">fas fa-star</v-icon>
-                <v-icon small color="#32AE87">fas fa-star</v-icon>
-                <v-icon small color="#32AE87">fas fa-star</v-icon>
-                <v-icon small color="#32AE87">fas fa-star</v-icon>
-                <v-icon small color="#32AE87">fas fa-star</v-icon>
-              </v-list-item>
-            </v-list>
-
-            <v-img src="../assets/detail.jpg" height="200px"></v-img>
-          </v-card>
-        </v-col>
-      </v-row>
+                <v-img src="../assets/detail.jpg" height="200px"></v-img>
+              </v-card>
+            </div>
+          </v-col>
+        </v-row>
+      </v-container>
     </div>
     <v-footer color="#FAF1ED">
       <v-col class="text-center">
@@ -222,6 +226,7 @@ div {
 
 .main {
   background-color: lightblue;
+  height: 100%;
 }
 
 .icon {
@@ -229,29 +234,10 @@ div {
   margin: 2px;
   transform: translate(0px, -3px);
 }
-.emplacement {
-  margin: 20px;
-}
-.map {
-  padding: 5px;
-  margin: 10px;
-}
-
-.detail-content {
-  background-color: white;
-  height: 400px;
-  width: 400px;
-  margin: auto;
-}
-
-.menu-content {
-  background-color: white;
-  height: 400px;
-  width: 400px;
-  margin: auto;
-}
 
 .fav-btn {
   margin-left: 10px;
 }
+
+
 </style>
