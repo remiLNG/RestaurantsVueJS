@@ -16,7 +16,8 @@
       </v-app-bar>
     </div>
     <div>
-      <h1>Bienvenue au restaurant {{ restaurant.name }}</h1>
+      <h1>Bienvenue au restaurant</h1>
+      <h2> {{ restaurant.name }} </h2>
     </div>
 
     <div class="main">
@@ -34,7 +35,7 @@
                     <v-list-item-action>
                       <div class="map">
                         <l-map
-                          style="height: 30rem;  width: 30rem;"
+                          style="height: 30rem;  width: 33.5rem;"
                           :zoom="zoom"
                           :center="center"
                           @update:zoom="zoomUpdated"
@@ -95,7 +96,7 @@
                     </v-list-item-action>
                     <v-list-item-content>
                       <v-list-item-title>
-                        1 milliard de pognon</v-list-item-title
+                        {{prixMin(7,12)}} € - {{prixMax(15,25)}} €  </v-list-item-title
                       >
                     </v-list-item-content>
                   </v-list-item>
@@ -141,7 +142,7 @@
         </v-row>
       </v-container>
     </div>
-    <v-footer color="#FAF1ED">
+    <v-footer absolute color="#FAF1ED">
       <v-col class="text-center">
         <p>
           Projet Buffa - Fabre-Sauterey Guilhem - Longin Rémi -
@@ -214,6 +215,13 @@ export default {
     boundsUpdated(bounds) {
       this.bounds = bounds;
     },
+    prixMin(min,max){
+      return Math.floor(Math.random() * (max - min) + min);
+    },
+    prixMax(min,max){
+      return Math.floor(Math.random() * (max - min) + min);
+    }
+
   },
 };
 </script>
@@ -224,9 +232,26 @@ div {
   font-family: Arial, Tahoma, Bitstream Vera Sans, sans-serif;
 }
 
+h1,h2 {
+  font-style: italic;
+}
+
+h1{
+  margin-top: 20px;
+  color: #9BC9E0;
+  font-size: 300%;
+}
+
+h2{
+  font-size: 200%;
+  margin-bottom: 10px;
+}
+
+
+
 .main {
-  background-color: lightblue;
-  height: 100%;
+ background: linear-gradient(#9BC9E0,#FAF1ED );
+  height: 00%;
 }
 
 .icon {
