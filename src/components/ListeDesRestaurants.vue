@@ -24,6 +24,7 @@ export default {
       dialogtrash: false,
       dialoginfo: false,
       addConfirm: false,
+      addFav: false,
       selectedName: "",
       selectedID: "",
       favoris: [],
@@ -39,12 +40,8 @@ export default {
     randomRestaurantName() {
       if (this.restaurants.length > 0) {
         const r = Math.floor(Math.random() * this.restaurants.length);
-        const rgrade =  Math.floor(Math.random() * this.restaurants[r].grades.length);
-        const note = this.restaurants[r].grades[rgrade].grade;
         const restoName = this.restaurants[r].name;
-        while (note == "A") {
-           return restoName;
-        }
+        return restoName
       }
       return "toto";
       

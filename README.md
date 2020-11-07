@@ -1,10 +1,11 @@
 # RestaurantsVueJS
 
-# Prerequisites
+## Technologies used
 
 + Node Js
 + Vue Js
 + MongoDB
++ Vuetify
 
 ## import the dataset
 
@@ -22,39 +23,35 @@ mongoimport --db test --collection restaurants --drop --file primer-dataset.json
 mongod
 ```
 
-
+## install all the dependencies
 
 + Move to server folder
 ```
-cd serveur
+...\RestaurantsVueJS\serveur>
 ```
 
-## install all the dependencies
 ```
-npm i 
+...\RestaurantsVueJS\serveur> npm i 
 ```
 
 + Start the server
 ```
-node serverCrudWithMongo.js
+...\RestaurantsVueJS\serveur> node serverCrudWithMongo.js
 ```
 
 + Move to main folder
 
-## install all the dependencies
 ```
-npm i 
+...\RestaurantsVueJS> npm i 
 ```
 
 ```
-npm i -g serve
+...\RestaurantsVueJS> npm i -g serve
 ```
 + Start the client 
 ```
-npm run serve
+...\RestaurantsVueJS> npm run serve
 ```
-
-# Features
 
 # Authors
 

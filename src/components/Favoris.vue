@@ -37,7 +37,7 @@
       </tbody>
     </v-simple-table>
 
-    <v-footer color="#FAF1ED">
+    <v-footer absolute color="#FAF1ED">
       <v-col class="text-center">
         <p>
           Projet Buffa - Fabre-Sauterey Guilhem - Longin Rémi -
