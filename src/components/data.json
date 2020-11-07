@@ -1,0 +1,120 @@
+﻿{
+   "entrée":[
+      {
+         "nom":"Tartare de thon",
+         "description":"Thon de l'Atlantique cru avec son jus de citon",
+         "prix":16,
+         "cuisine": ""
+      },
+      {
+         "nom":"Planche de frommage",
+         "description":"Frommage du moment accompagné de crudités",
+         "prix":11,
+         "cuisine": ""
+      },
+      {
+         "nom":"Assiette de foie gras",
+         "description":"Véritable foie du Sud-Est élevé en plein air",
+         "prix":12,
+         "cuisine": ""
+      },
+      {
+         "nom":"Gaspacho",
+         "description":"Gaspacho de tomate venu d'un pays chaud",
+         "prix":9,
+         "cuisine": ""
+      },
+      {
+         "nom":"Brandade de moru",
+         "description":"Spécialité portuguaise du chef Luis",
+         "prix":7,
+         "cuisine": ""
+      },
+      {
+         "nom":"Samousa de porc",
+         "description":"Petit beignet en triangle a la viande",
+         "prix":8,
+         "cuisine": ""
+      }
+      
+      
+   ],
+   "plat":[
+      {
+         "nom":"Steak Frites",
+         "description":"Frites maison avec steak du bouché",
+         "prix":12,
+         "cuisine": "American"
+      },
+      {
+         "nom":"Burger du chef",
+         "description":"Steak, Salade, Tomate, Oignon, Sauce aux choix",
+         "prix":15,
+         "cuisine": "American"
+      },
+      {
+         "nom":"Salade César",
+         "description":"Salade accompagné de poulet et de divert légumes de saison",
+         "prix":12,
+         "cuisine": ""
+      },
+      {
+         "nom":"Omelette aux cèpes",
+         "description":"Fait a partir d'oeufs frais et de cèpes de la fôret d'a coté",
+         "prix":15,
+         "cuisine": ""
+      },
+      {
+         "nom":"Entrecôte",
+         "description":"Piece de boeuf 200g avec sa garniture au choix",
+         "prix":17,
+         "cuisine": ""
+      },
+      {
+         "nom":"Cassoulet",
+         "description":"Cassoulet en boîte pas top mais le cassoulet c'est bon",
+         "prix":11,
+         "cuisine": ""
+      },
+      {
+         "nom":"Soupe Pescadou",
+         "description":"Soupe de poisson de la peche du jour",
+         "prix":18,
+         "cuisine": ""
+      }
+      
+   ],
+   "dessert":[
+      {
+         "nom":"Clafouti à la griotte",
+         "description":"A la pate brisé et aux bonnes cerises du pays",
+         "prix":6,
+         "cuisine": ""
+      },
+      {
+         "nom":"2 Boules de glace",
+         "description":"Parfum au choix: vanille, chocolat, myrtille, ananas, mangue",
+         "prix":5,
+         "cuisine": ""
+      },
+      {
+         "nom":"Fondant aux chocolat",
+         "description":"Fondant accompagné d'un boule vanille et de sucre glace",
+         "prix":8,
+         "cuisine": ""
+      },
+      {
+         "nom":"Perles Coco",
+         "description":"Beignet de coco avec un colis jaune pas bon",
+         "prix":5,
+         "cuisine": ""
+      },
+      {
+         "nom":"Riz au lait",
+         "description":"Riz de camarague au lait de vache limousine",
+         "prix":7,
+         "cuisine": ""
+      }
+      
+   ]
+}

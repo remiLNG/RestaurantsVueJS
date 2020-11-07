@@ -78,6 +78,17 @@
                   height="200px"
                   position="center 10%"
                 ></v-img>
+                <p>{{entree[0].nom}}</p>
+                <p>{{entree[0].description}}</p>
+                <p>{{entree[0].prix}} $</p>
+                <p>------------------<p>
+                <p>{{plat[0].nom}}</p>
+                <p>{{plat[0].description}}</p>
+                <p>{{plat[0].prix}} $</p>
+                <p>------------------<p>
+                <p>{{dessert[0].nom}}</p>
+                <p>{{dessert[0].description}}</p>
+                <p>{{dessert[0].prix}} $</p>
               </v-card>
             </div>
           </v-col>
@@ -157,6 +168,7 @@
 <script>
 import { latLng } from "leaflet";
 import { LMap, LTileLayer, LMarker } from "vue2-leaflet";
+import ListMenu from './data.json';
 
 export default {
   name: "Detail",
@@ -180,9 +192,14 @@ export default {
       bounds: null,
       zoom: 13,
       LMarker: latLng(47.41322, -1.219482),
+      menu: ListMenu,
+      entree: [],
+      plat:[],
+      dessert:[],
     };
   },
   mounted() {
+    this.creerMenu();
     let url = "http://localhost:8080/api/restaurants/" + this.id;
     fetch(url)
       .then((response) => {
@@ -220,6 +237,14 @@ export default {
     },
     prixMax(min,max){
       return Math.floor(Math.random() * (max - min) + min);
+    },
+
+    creerMenu(){
+      this.entree.push(this.menu.entrée[Math.floor(Math.random()* this.menu.entrée.length)]);
+      this.plat.push(this.menu.plat[Math.floor(Math.random()* this.menu.plat.length)]);
+      this.dessert.push(this.menu.dessert[Math.floor(Math.random()* this.menu.dessert.length)]);
+
+
     }
 
   },
