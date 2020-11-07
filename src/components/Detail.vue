@@ -15,7 +15,7 @@
         </v-btn>
       </v-app-bar>
     </div>
-    <div>
+    <div class="title">
       <h1>Bienvenue au restaurant</h1>
       <h2> {{ restaurant.name }} </h2>
     </div>
@@ -26,7 +26,7 @@
           <v-col cols="4">
             <div class="emplacement">
               <v-card>
-                <v-card-title class="teal accent-4">
+                <v-card-title class="cyan lighten-3 justify-center">
                   <span class="headline white--text">Emplacement</span>
                 </v-card-title>
 
@@ -69,7 +69,7 @@
           <v-col cols="4">
             <div class="menu">
               <v-card>
-                <v-card-title class="teal accent-4">
+                <v-card-title class="cyan lighten-3 justify-center">
                   <span class="headline white--text">Menu</span>
                 </v-card-title>
 
@@ -84,7 +84,7 @@
           <v-col cols="4">
             <div class="detail">
               <v-card>
-                <v-card-title class="teal accent-4">
+                <v-card-title class="cyan lighten-3 justify-center">
                   <span class="headline white--text">Détails</span>
                 </v-card-title>
 
@@ -232,8 +232,9 @@ div {
   font-family: Arial, Tahoma, Bitstream Vera Sans, sans-serif;
 }
 
-h1,h2 {
+.title {
   font-style: italic;
+  margin: 1%;
 }
 
 h1{
@@ -245,13 +246,13 @@ h1{
 h2{
   font-size: 200%;
   margin-bottom: 10px;
+  margin: 20px;
 }
 
 
 
 .main {
- background: linear-gradient(#9BC9E0,#FAF1ED );
-  height: 00%;
+ background: linear-gradient( #FAF1ED,#9BC9E0 );
 }
 
 .icon {

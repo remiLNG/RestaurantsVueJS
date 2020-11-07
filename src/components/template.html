@@ -22,18 +22,28 @@
     </p>
   </div>
   <div class="moman">
-    <div class="moman-txt">
-      <h2> Restaurant du moment  </h2>
-      <div class="star">
-        <v-icon color="yellow">fas fa-star</v-icon>
-        <v-icon color="yellow">fas fa-star</v-icon>
-        <v-icon color="yellow">fas fa-star</v-icon>
-        <v-icon color="yellow">fas fa-star</v-icon>
-        <v-icon color="yellow">fas fa-star</v-icon>
-      </div>
-      <!-- <p> {{  randomRestaurantName }} </p> -->
-      
-    </div>
+    <v-container>
+      <v-row class="justify-center">
+        <v-col cols="4">
+          <v-card>
+            <v-img  src="../assets/best.jpg" height="200px" position="center 20%"></v-img>
+            <v-card-title class="justify-center">
+              <span>Restaurant du moment</span>
+            </v-card-title>
+            <v-card-text>
+              <v-icon color="yellow">fas fa-star</v-icon>
+              <v-icon color="yellow">fas fa-star</v-icon>
+              <v-icon color="yellow">fas fa-star</v-icon>
+              <v-icon color="yellow">fas fa-star</v-icon>
+              <v-icon color="yellow">fas fa-star</v-icon>
+            </v-card-text>
+            <v-card-text>
+              <div class="my-4 subtitle-1"> {{randomRestaurantName}} </div>
+            </v-card-text>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
   </div>
   <div class="add-resto">
     <h2>Ajouter un nouveau restaurant</h2>
@@ -44,12 +54,12 @@
           </v-text-field>
           <v-text-field name="cuisine" v-model="cuisine" filled rounded label="Type cuisine" clearable type="text"
             required></v-text-field>
-            <v-text-field name="borough" v-model="borough" filled rounded label="Nom quartier" clearable type="text"
+          <v-text-field name="borough" v-model="borough" filled rounded label="Nom quartier" clearable type="text"
             required></v-text-field>
           <v-dialog v-model="addConfirm" width="500">
             <template v-slot:activator="{ on, attrs }">
-              <v-btn :disabled="nom.length < 1 || cuisine.length < 1 || borough.length < 1" small type="submit" v-bind="attrs" v-on="on">
-                Ajouter </v-btn>
+              <v-btn :disabled="nom.length < 1 || cuisine.length < 1 || borough.length < 1" small type="submit"
+                v-bind="attrs" v-on="on"> Ajouter </v-btn>
             </template>
             <v-card>
               <v-card-title class="justify-center">Nouveau restaurant ajouté !</v-card-title>
@@ -64,28 +74,18 @@
   </div>
   <p> {{nbRestaurantsTotal}} restaurants</p>
   <div class="slider">
-  <v-container>
-    <v-col cols="12" sm="4">
-      <v-slider
-      @click="getRestaurantsFromServer()"
-      v-model="pagesize"
-      :label="slider.label"
-      :thumb-color="slider.color"
-      thumb-label="always"
-      color="#32AE87"
-      min="1"
-      max="10"
-    ></v-slider>
-      </v-slider>
-    </v-col >
-  </v-container>
-</div>
+    <v-container>
+      <v-col cols="12" sm="4">
+        <v-slider @click="getRestaurantsFromServer()" v-model="pagesize" :label="slider.label"
+          :thumb-color="slider.color" thumb-label="always" color="#32AE87" min="1" max="10"></v-slider>
+        </v-slider>
+      </v-col>
+    </v-container>
+  </div>
   <v-simple-table>
     <thead>
       <tr>
-        <th v-for="(header, i) in columnHeaders" :key="i"> 
-          {{header}} 
-        </th>
+        <th v-for="(header, i) in columnHeaders" :key="i"> {{header}} </th>
       </tr>
     </thead>
     <tbody>
@@ -95,11 +95,13 @@
         <td>{{ r.cuisine }}</td>
         <td>{{r.borough}}</td>
         <td class="info-btn">
-              <v-btn icon @click>
-                <router-link :to="'/detail/' + r._id"><v-icon transparent> fas fa-info-circle </v-icon></router-link>
-              </v-btn>  
+          <v-btn icon @click>
+            <router-link :to="'/detail/' + r._id">
+              <v-icon transparent> fas fa-info-circle </v-icon>
+            </router-link>
+          </v-btn>
         </td>
-        <td class="like-btn" >
+        <td class="like-btn">
           <v-dialog :retain-focus="false" v-model="addFav" width="500">
             <template v-slot:activator="{ on, attrs }">
               <v-btn icon @click=ajoutFavoris(r) v-bind="attrs" v-on="on" type="submit">
@@ -156,7 +158,6 @@
     <v-icon large color="#32AE87"> fas fa-chevron-circle-right</v-icon>
   </v-btn>
   <p>Page {{ page +1 }} sur {{ nbPagesTotal +1 }} </p>
- 
   <v-footer color="#FAF1ED">
     <v-col class="text-center">
       <p> Projet Buffa - Fabre-Sauterey Guilhem - Longin Rémi - {{ new Date().getFullYear() }} </p>
