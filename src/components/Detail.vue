@@ -73,22 +73,26 @@
                   <span class="headline white--text">Menu</span>
                 </v-card-title>
 
-                <v-img
+                <div class="entrees"><p> ~ Entree ~</p></div>
+                <p>{{entree[0].nom}}</p>
+                <p>{{entree[0].description}}</p>
+                <p>{{entree[0].prix}} $</p>
+            
+                <div class="plats"><p> ~ Plat ~</p></div>
+                <p>{{plat[0].nom}}</p>
+                <p>{{plat[0].description}}</p>
+                <p>{{plat[0].prix}} $</p>
+            
+                <div class="desserts"><p> ~ Dessert ~</p></div>
+                <p>{{dessert[0].nom}}</p>
+                <p>{{dessert[0].description}}</p>
+                <p>{{dessert[0].prix}} $</p>
+                  <v-img
                   src="../assets/menu.jpg"
                   height="200px"
                   position="center 10%"
                 ></v-img>
-                <p>{{entree[0].nom}}</p>
-                <p>{{entree[0].description}}</p>
-                <p>{{entree[0].prix}} $</p>
-                <p>------------------<p>
-                <p>{{plat[0].nom}}</p>
-                <p>{{plat[0].description}}</p>
-                <p>{{plat[0].prix}} $</p>
-                <p>------------------<p>
-                <p>{{dessert[0].nom}}</p>
-                <p>{{dessert[0].description}}</p>
-                <p>{{dessert[0].prix}} $</p>
+
               </v-card>
             </div>
           </v-col>
@@ -153,7 +157,7 @@
         </v-row>
       </v-container>
     </div>
-    <v-footer absolute color="#FAF1ED">
+    <v-footer color="#FAF1ED">
       <v-col class="text-center">
         <p>
           Projet Buffa - Fabre-Sauterey Guilhem - Longin Rémi -
@@ -290,5 +294,9 @@ h2{
   margin-left: 10px;
 }
 
+.entrees, .plats,.desserts{
+  color:#32AE87;
+  font-size: 20px;
+}
 
 </style>
