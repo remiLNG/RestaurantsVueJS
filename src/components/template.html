@@ -104,7 +104,7 @@
         <td class="like-btn">
           <v-dialog :retain-focus="false" v-model="addFav" width="500">
             <template v-slot:activator="{ on, attrs }">
-              <v-btn icon @click=ajoutFavoris(r) v-bind="attrs" v-on="on" type="submit">
+              <v-btn  :disabled="favoris.includes(r)" icon @click=ajoutFavoris(r) v-bind="attrs" v-on="on" type="submit">
                 <v-icon>mdi-heart</v-icon>
               </v-btn>
             </template>

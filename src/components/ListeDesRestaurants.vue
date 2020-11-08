@@ -49,7 +49,9 @@ export default {
   },
   methods: {
     ajoutFavoris(rid) {
-      this.favoris.push(rid);
+      if(!this.favoris.includes(rid)){
+        this.favoris.push(rid);
+      }
       console.log(this.favoris);
     },
     pagePrecedente() {
