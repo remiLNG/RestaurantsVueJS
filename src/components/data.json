@@ -7,14 +7,14 @@
          "cuisine": ""
       },
       {
-         "nom":"Planche de frommage",
-         "description":"Frommage du moment accompagné de crudités",
+         "nom":"Planche de fromage",
+         "description":"Fromage du moment accompagné de crudités",
          "prix":11,
          "cuisine": ""
       },
       {
          "nom":"Assiette de foie gras",
-         "description":"Véritable foie du Sud-Est élevé en plein air",
+         "description":"Véritable foie gras du Sud-Est élevé en plein air",
          "prix":12,
          "cuisine": ""
       },
@@ -32,7 +32,7 @@
       },
       {
          "nom":"Samousa de porc",
-         "description":"Petit beignet en triangle a la viande",
+         "description":"Petit beignet en triangle à la viande",
          "prix":8,
          "cuisine": ""
       }
@@ -42,7 +42,7 @@
    "plat":[
       {
          "nom":"Steak Frites",
-         "description":"Frites maison avec steak du bouché",
+         "description":"Frites maison avec steak du boucher",
          "prix":12,
          "cuisine": "American"
       },
@@ -54,19 +54,19 @@
       },
       {
          "nom":"Salade César",
-         "description":"Salade accompagné de poulet et de divert légumes de saison",
+         "description":"Salade accompagnée de poulet et de divers légumes de saison",
          "prix":12,
          "cuisine": ""
       },
       {
          "nom":"Omelette aux cèpes",
-         "description":"Fait a partir d'oeufs frais et de cèpes de la fôret d'a coté",
+         "description":"Fait à partir d'oeufs frais et de cèpes de la fôret d'à côté",
          "prix":15,
          "cuisine": ""
       },
       {
          "nom":"Entrecôte",
-         "description":"Piece de boeuf 200g avec sa garniture au choix",
+         "description":"Pièce de boeuf 200g avec sa garniture au choix",
          "prix":17,
          "cuisine": ""
       },
@@ -78,7 +78,7 @@
       },
       {
          "nom":"Soupe Pescadou",
-         "description":"Soupe de poisson de la peche du jour",
+         "description":"Soupe de poisson de la pêche du jour",
          "prix":18,
          "cuisine": ""
       }
@@ -86,8 +86,8 @@
    ],
    "dessert":[
       {
-         "nom":"Clafouti à la griotte",
-         "description":"A la pate brisé et aux bonnes cerises du pays",
+         "nom":"Clafoutis à la griotte",
+         "description":"A la pate brisée et aux bonnes cerises du pays",
          "prix":6,
          "cuisine": ""
       },
@@ -98,20 +98,20 @@
          "cuisine": ""
       },
       {
-         "nom":"Fondant aux chocolat",
-         "description":"Fondant accompagné d'un boule vanille et de sucre glace",
+         "nom":"Fondant au chocolat",
+         "description":"Fondant accompagné d'une boule de glace vanille et de sucre glace",
          "prix":8,
          "cuisine": ""
       },
       {
          "nom":"Perles Coco",
-         "description":"Beignet de coco avec un colis jaune pas bon",
+         "description":"Beignet de coco avec un coulis jaune pas bon",
          "prix":5,
          "cuisine": ""
       },
       {
          "nom":"Riz au lait",
-         "description":"Riz de camarague au lait de vache limousine",
+         "description":"Riz de camargue au lait de vache limousine",
          "prix":7,
          "cuisine": ""
       }

@@ -74,18 +74,18 @@
                 </v-card-title>
 
                 <div class="entrees"><p> ~ Entree ~</p></div>
-                <p>{{entree[0].nom}}</p>
-                <p>{{entree[0].description}}</p>
+                <p id="nom">{{entree[0].nom}}</p>
+                <p id="desc">{{entree[0].description}}</p>
                 <p>{{entree[0].prix}} $</p>
             
                 <div class="plats"><p> ~ Plat ~</p></div>
-                <p>{{plat[0].nom}}</p>
-                <p>{{plat[0].description}}</p>
+                <p id="nom">{{plat[0].nom}}</p>
+                <p id="desc">{{plat[0].description}}</p>
                 <p>{{plat[0].prix}} $</p>
             
                 <div class="desserts"><p> ~ Dessert ~</p></div>
-                <p>{{dessert[0].nom}}</p>
-                <p>{{dessert[0].description}}</p>
+                <p id="nom">{{dessert[0].nom}}</p>
+                <p id="desc">{{dessert[0].description}}</p>
                 <p>{{dessert[0].prix}} $</p>
                   <v-img
                   src="../assets/menu.jpg"
@@ -93,6 +93,9 @@
                   position="center 10%"
                 ></v-img>
 
+                
+                
+                
               </v-card>
             </div>
           </v-col>
@@ -111,7 +114,7 @@
                     </v-list-item-action>
                     <v-list-item-content>
                       <v-list-item-title>
-                        {{prixMin(7,12)}} € - {{prixMax(15,25)}} €  </v-list-item-title
+                        {{this.min}} € - {{this.max}} €  </v-list-item-title
                       >
                     </v-list-item-content>
                   </v-list-item>
@@ -200,10 +203,14 @@ export default {
       entree: [],
       plat:[],
       dessert:[],
+      max: null,
+      min: null,
     };
   },
   mounted() {
     this.creerMenu();
+    this.prixMax();
+    this.prixMin();
     let url = "http://localhost:8080/api/restaurants/" + this.id;
     fetch(url)
       .then((response) => {
@@ -236,11 +243,23 @@ export default {
     boundsUpdated(bounds) {
       this.bounds = bounds;
     },
-    prixMin(min,max){
-      return Math.floor(Math.random() * (max - min) + min);
+    prixMin(){
+      this.min = this.entree[0].prix;
+      if(this.plat[0].prix < this.min){
+        this.min = this.plat[0].prix
+      }
+      if(this.dessert[0].prix < this.min){
+        this.min = this.dessert[0].prix
+      }
     },
-    prixMax(min,max){
-      return Math.floor(Math.random() * (max - min) + min);
+    prixMax(){
+      this.max = this.entree[0].prix;
+      if(this.plat[0].prix > this.max){
+        this.max = this.plat[0].prix
+      }
+      if(this.dessert[0].prix > this.max){
+        this.max = this.dessert[0].prix
+      }
     },
 
     creerMenu(){
@@ -297,6 +316,13 @@ h2{
 .entrees, .plats,.desserts{
   color:#32AE87;
   font-size: 20px;
+}
+#nom{
+  font-weight: bold;
+}
+
+#desc{
+  font-style: oblique 90deg;
 }
 
 </style>
