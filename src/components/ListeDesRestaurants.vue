@@ -6,7 +6,6 @@
 import _ from "lodash";
 export default {
   name: "ListeDesRestaurants",
-  props: ["fav1"],
   data: function () {
     return {
       restaurants: [],
@@ -70,7 +69,7 @@ export default {
       if (this.page >= this.nbPagesTotal) {
         this.page = this.nbPagesTotal;
       }
-      this.page += this.nbPagesTotal - this.page;
+      this.page += this.nbPagesTotal - 1 - this.page;
       this.getRestaurantsFromServer();
     },
     pageprems() {

@@ -8,18 +8,6 @@
   </div>
   <div class="home_img">
     <h1 class="h1title">Liste des Restaurants</h1>
-    <p class="nom">
-      <input class="searchByNom" @input="chercherRestaurants()" placeholder="Recherche par nom" type="text"
-        v-model="nomRestauRecherche" />
-    </p>
-    <p class="cuisine">
-      <input class="searchByCuisine" @input="chercherCuisines()" placeholder="Recherche par cuisine" type="text"
-        v-model="nomCuisineRecherche" />
-    </p>
-    <p class="quartier">
-      <input class="searchByQuartier" @input="chercherQuartiers()" placeholder="Recherche par quartier" type="text"
-        v-model="nomQuartierRecherche" />
-    </p>
   </div>
   <div class="moman">
     <v-container>
@@ -73,6 +61,18 @@
     </v-form>
   </div>
   <p> {{nbRestaurantsTotal}} restaurants</p>
+    <p class="nom">
+    <input class="searchByNom" @input="chercherRestaurants()" placeholder="Recherche par nom" type="text"
+      v-model="nomRestauRecherche" />
+  </p>
+  <p class="cuisine">
+    <input class="searchByCuisine" @input="chercherCuisines()" placeholder="Recherche par cuisine" type="text"
+      v-model="nomCuisineRecherche" />
+  </p>
+  <p class="quartier">
+    <input class="searchByQuartier" @input="chercherQuartiers()" placeholder="Recherche par quartier" type="text"
+      v-model="nomQuartierRecherche" />
+  </p>
   <div class="slider">
     <v-container>
       <v-col cols="12" sm="4">
@@ -82,6 +82,7 @@
       </v-col>
     </v-container>
   </div>
+
   <v-simple-table>
     <thead>
       <tr>
@@ -152,12 +153,12 @@
     <v-icon large color="#32AE87"> fas fa-chevron-circle-left</v-icon>
   </v-btn> &nbsp; <v-btn class="btn-previous" type="submit" :disabled="page === 0" @click="pagePrecedente()" icon>
     <v-icon large color="#32AE87"> fas fa-arrow-circle-left</v-icon>
-  </v-btn> &nbsp; <v-btn class="btn-next" type="submit" :disabled="page === nbPagesTotal" @click="pageSuivante()" icon>
+  </v-btn> &nbsp; <v-btn class="btn-next" type="submit" :disabled="page === nbPagesTotal -1" @click="pageSuivante()" icon>
     <v-icon large color="#32AE87"> fas fa-arrow-circle-right </v-icon>
-  </v-btn> &nbsp; <v-btn @click="pageder()" :disabled="page === nbPagesTotal" icon>
+  </v-btn> &nbsp; <v-btn @click="pageder()" :disabled="page === nbPagesTotal - 1" icon>
     <v-icon large color="#32AE87"> fas fa-chevron-circle-right</v-icon>
   </v-btn>
-  <p>Page {{ page +1 }} sur {{ nbPagesTotal +1 }} </p>
+  <p>Page {{ page +1 }} sur {{ nbPagesTotal }} </p>
   <v-footer color="#FAF1ED">
     <v-col class="text-center">
       <p> Projet Buffa - Fabre-Sauterey Guilhem - Longin Rémi - {{ new Date().getFullYear() }} </p>

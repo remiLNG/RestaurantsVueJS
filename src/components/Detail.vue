@@ -17,7 +17,28 @@
     </div>
     <div class="title">
       <h1>Bienvenue au restaurant</h1>
-      <h2> {{ restaurant.name }} </h2>
+      <h2>{{ restaurant.name }}</h2>
+      <v-dialog :retain-focus="false" v-model="addFav" width="500">
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            :disabled="favoris.includes(restaurant)"
+            @click="ajoutFavoris(restaurant)"
+            v-bind="attrs"
+            v-on="on"
+            type="submit"
+          >
+           Ajouter aux favoris
+          </v-btn>
+        </template>
+        <v-card>
+          <v-card-title class="justify-center"
+            >Restaurant ajouté à vos favoris !</v-card-title
+          >
+          <v-card-actions class="justify-center">
+            <v-btn color="primary" text @click="addFav = false"> OK </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </div>
 
     <div class="main">
@@ -35,7 +56,7 @@
                     <v-list-item-action>
                       <div class="map">
                         <l-map
-                          style="height: 30rem;  width: 33.5rem;"
+                          style="height: 30rem; width: 33.5rem"
                           :zoom="zoom"
                           :center="center"
                           @update:zoom="zoomUpdated"
@@ -73,29 +94,25 @@
                   <span class="headline white--text">Menu</span>
                 </v-card-title>
 
-                <div class="entrees"><p> ~ Entree ~</p></div>
-                <p id="nom">{{entree[0].nom}}</p>
-                <p id="desc">{{entree[0].description}}</p>
-                <p>{{entree[0].prix}} $</p>
-            
-                <div class="plats"><p> ~ Plat ~</p></div>
-                <p id="nom">{{plat[0].nom}}</p>
-                <p id="desc">{{plat[0].description}}</p>
-                <p>{{plat[0].prix}} $</p>
-            
-                <div class="desserts"><p> ~ Dessert ~</p></div>
-                <p id="nom">{{dessert[0].nom}}</p>
-                <p id="desc">{{dessert[0].description}}</p>
-                <p>{{dessert[0].prix}} $</p>
-                  <v-img
+                <div class="entrees"><p>~ Entree ~</p></div>
+                <p id="nom">{{ entree[0].nom }}</p>
+                <p id="desc">{{ entree[0].description }}</p>
+                <p>{{ entree[0].prix }} €</p>
+
+                <div class="plats"><p>~ Plat ~</p></div>
+                <p id="nom">{{ plat[0].nom }}</p>
+                <p id="desc">{{ plat[0].description }}</p>
+                <p>{{ plat[0].prix }} €</p>
+
+                <div class="desserts"><p>~ Dessert ~</p></div>
+                <p id="nom">{{ dessert[0].nom }}</p>
+                <p id="desc">{{ dessert[0].description }}</p>
+                <p>{{ dessert[0].prix }} €</p>
+                <v-img
                   src="../assets/menu.jpg"
                   height="200px"
                   position="center 10%"
                 ></v-img>
-
-                
-                
-                
               </v-card>
             </div>
           </v-col>
@@ -114,8 +131,8 @@
                     </v-list-item-action>
                     <v-list-item-content>
                       <v-list-item-title>
-                        {{this.min}} € - {{this.max}} €  </v-list-item-title
-                      >
+                        {{ this.min }} € - {{ this.max }} €
+                      </v-list-item-title>
                     </v-list-item-content>
                   </v-list-item>
 
@@ -175,7 +192,7 @@
 <script>
 import { latLng } from "leaflet";
 import { LMap, LTileLayer, LMarker } from "vue2-leaflet";
-import ListMenu from './data.json';
+import ListMenu from "./data.json";
 
 export default {
   name: "Detail",
@@ -201,10 +218,12 @@ export default {
       LMarker: latLng(47.41322, -1.219482),
       menu: ListMenu,
       entree: [],
-      plat:[],
-      dessert:[],
+      plat: [],
+      dessert: [],
       max: null,
       min: null,
+      addFav: false,
+      favoris: [],
     };
   },
   mounted() {
@@ -234,6 +253,12 @@ export default {
       }
       return x;
     },
+     ajoutFavoris(rid) {
+      if(!this.favoris.includes(rid)){
+        this.favoris.push(rid);
+      }
+      console.log(this.favoris);
+    },
     zoomUpdated(zoom) {
       this.zoom = zoom;
     },
@@ -243,33 +268,36 @@ export default {
     boundsUpdated(bounds) {
       this.bounds = bounds;
     },
-    prixMin(){
+    prixMin() {
       this.min = this.entree[0].prix;
-      if(this.plat[0].prix < this.min){
-        this.min = this.plat[0].prix
+      if (this.plat[0].prix < this.min) {
+        this.min = this.plat[0].prix;
       }
-      if(this.dessert[0].prix < this.min){
-        this.min = this.dessert[0].prix
+      if (this.dessert[0].prix < this.min) {
+        this.min = this.dessert[0].prix;
       }
     },
-    prixMax(){
+    prixMax() {
       this.max = this.entree[0].prix;
-      if(this.plat[0].prix > this.max){
-        this.max = this.plat[0].prix
+      if (this.plat[0].prix > this.max) {
+        this.max = this.plat[0].prix;
       }
-      if(this.dessert[0].prix > this.max){
-        this.max = this.dessert[0].prix
+      if (this.dessert[0].prix > this.max) {
+        this.max = this.dessert[0].prix;
       }
     },
 
-    creerMenu(){
-      this.entree.push(this.menu.entrée[Math.floor(Math.random()* this.menu.entrée.length)]);
-      this.plat.push(this.menu.plat[Math.floor(Math.random()* this.menu.plat.length)]);
-      this.dessert.push(this.menu.dessert[Math.floor(Math.random()* this.menu.dessert.length)]);
-
-
-    }
-
+    creerMenu() {
+      this.entree.push(
+        this.menu.entrée[Math.floor(Math.random() * this.menu.entrée.length)]
+      );
+      this.plat.push(
+        this.menu.plat[Math.floor(Math.random() * this.menu.plat.length)]
+      );
+      this.dessert.push(
+        this.menu.dessert[Math.floor(Math.random() * this.menu.dessert.length)]
+      );
+    },
   },
 };
 </script>
@@ -285,22 +313,20 @@ div {
   margin: 1%;
 }
 
-h1{
+h1 {
   margin-top: 20px;
-  color: #9BC9E0;
+  color: #9bc9e0;
   font-size: 300%;
 }
 
-h2{
+h2 {
   font-size: 200%;
   margin-bottom: 10px;
   margin: 20px;
 }
 
-
-
 .main {
- background: linear-gradient( #FAF1ED,#9BC9E0 );
+  background: linear-gradient(#faf1ed, #9bc9e0);
 }
 
 .icon {
@@ -313,16 +339,17 @@ h2{
   margin-left: 10px;
 }
 
-.entrees, .plats,.desserts{
-  color:#32AE87;
+.entrees,
+.plats,
+.desserts {
+  color: #32ae87;
   font-size: 20px;
 }
-#nom{
+#nom {
   font-weight: bold;
 }
 
-#desc{
+#desc {
   font-style: oblique 90deg;
 }
-
 </style>
